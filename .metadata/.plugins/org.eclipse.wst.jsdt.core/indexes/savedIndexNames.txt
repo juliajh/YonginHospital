@@ -1,0 +1,2 @@
+INDEX VERSION 1.4+C:\Users\DKU\eclipse-workspace\aj22\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1667779010.index
