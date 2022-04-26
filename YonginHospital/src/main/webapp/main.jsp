@@ -8,7 +8,9 @@
 </head>
 <body>
 <jsp:include page="header.jsp">
-
 <jsp:include page="footer.jsp">
+		<jsp:param name="course" value="Advanced Java Programming"/> 
+		<jsp:param name="year" value="2022"/>
+</jsp:include> 
 </body>
 </html>
