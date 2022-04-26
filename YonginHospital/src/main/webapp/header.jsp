@@ -4,20 +4,12 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
-<link href="main.css" rel="stylesheet" type="text/css">
+<title>header</title>
 </head>
 <body>
-<div class="page-header">
-	<div class="containter">
-		<div class="row">
-			<div class="col-x1-12 col-1g-12 col-md-12 col-sm-12 col-12">
-				<div class="page-caption">
-					<h1 class="page-title">YongIn Hospital</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+<div style="float:right;">
+<!-- 모드를 선택할 수 있는 우측 상단 버튼 모음 -->
+	<a href="index.jsp">HOME</a><br>
 </div>
 </body>
 </html>

@@ -4,13 +4,18 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>YongInHospital</title>
+<title>MainPage</title>
 </head>
 <body>
-<jsp:include page="header.jsp">
-<jsp:include page="footer.jsp">
-		<jsp:param name="course" value="Advanced Java Programming"/> 
-		<jsp:param name="year" value="2022"/>
-</jsp:include> 
+<%
+	String mode = request.getParameter("mode");
+	if(mode==null)
+		mode="hospital";
+%>
+
+<jsp:include page="header.jsp"/>
+<jsp:include page="searchForm.jsp">
+	<jsp:param name="mode" value="<%=mode %>"/>
+</jsp:include>
 </body>
 </html>
