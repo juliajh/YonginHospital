@@ -50,12 +50,39 @@ mark {
 
 .card {
   background: var(--color-background);
-  padding: calc(4 * var(--size-bezel));
+  padding-bottom: calc(4 * var(--size-bezel));
   border-radius: var(--size-radius);
-  border: 2px solid var(--color-shadow, currentColor);
+  border: 1px solid var(--color-shadow, currentColor);
   box-shadow: 0.3rem 0.3rem 0 var(--color-shadow, currentColor);
   width:60%;
 }
+
+.searchHospital{
+	width:50%;
+	background-color:#B1B7B1;
+	border: 1px solid var(--color-shadow, currentColor);
+}
+
+.searchHospital a{
+	font-size:1.5rem;
+	text-decoration: none;
+	text-align:center;
+	color:black;
+}
+
+.location{
+	width:50%;
+	background-color:#B1B7B1;
+	border: 1px solid var(--color-shadow, currentColor);
+}
+
+.location a{
+	font-size:1.5rem;
+	text-decoration: none;
+	text-align:center;
+	color:black;
+}
+
 .card--inverted {
   --color-background: var(--color-dark);
   color: var(--color-light);
@@ -77,6 +104,9 @@ mark {
 
 .input {
   position: relative;
+  
+	  margin-right: calc(4 * var(--size-bezel));
+	  margin-left: calc(4 * var(--size-bezel));
 }
 .input__label {
   position: absolute;
@@ -110,6 +140,8 @@ mark {
 
 .button-group {
   margin-top: calc(var(--size-bezel) * 2.5);
+  margin-right: calc(4 * var(--size-bezel));
+  margin-left: calc(4 * var(--size-bezel));
 }
 
 button {

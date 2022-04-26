@@ -14,9 +14,13 @@
 %>
 <div class="container">
 	<div class="card">
-	    <div style="display:flex; font-size:30px; font-weight: 900; margin-bottom:30px;">
-		    <a href="main.jsp?mode=hospital" style=" margin-right:50px;">병원검색</a>
-		    <a href="main.jsp?mode=position" >위치검색</a>
+	    <div style="display:flex; margin-bottom:20px;">
+		    <div class="searchHospital">
+		    	<a href="main.jsp?mode=hospital" style=" margin-right:50px;">병원검색</a>
+		    </div>
+		    <div class="location">
+		    	<a href="main.jsp?mode=position" >위치검색</a>
+		    </div>
 	    </div>
 	<%
 		if(mode.contentEquals("hospital")){
