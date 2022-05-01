@@ -26,6 +26,7 @@
 		var page = 1;
 		var lastPage = $(".content").length;  //content의 개수
 		
+		//문서(페이지)가 로드되면 첫 페이지 시작
 		$html.animate({scrollTop:0},10); 
 	
 		//마우스 휠 굴렸을 때 이벤트 넣기
@@ -46,9 +47,10 @@
 		});	
 	</script>
 	<div class="container">
-		<div class="content">
+		<!-- 헤더의 크기만큼 빼준다. -->
+		<div class="content" style="height:calc(100vh - 65px);">
 			<div class="siteName">
-				<span>모두의<br/>병원</span>
+				<span><br>모두의<br/>병원</span><br><br>
 			</div>
 			<div class="siteExplain">
 			</div>
@@ -59,9 +61,9 @@
 				<img src="./media/health-insurance.png"/>
 			</div>
 		</div>
-		<div class="content" style="background-color:red;">
+		<div class="content" style="background-color:#BACEB0;">
 		</div>
-		<div class="content" style="background-color:black;">
+		<div class="content" style="background-color:#5E8680;">
 		</div>
 		<div class="content">
 		</div>

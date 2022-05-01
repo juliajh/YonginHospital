@@ -5,6 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<link href="css/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
