@@ -7,15 +7,8 @@
 <title>MainPage</title>
 </head>
 <body>
-<%
-	String mode = request.getParameter("mode");
-	if(mode==null)
-		mode="hospital";
-%>
 
-<jsp:include page="header.jsp"/>
-<jsp:include page="searchForm.jsp">
-	<jsp:param name="mode" value="<%=mode %>"/>
-</jsp:include>
+<jsp:include page="mainBody.jsp"/>
+
 </body>
 </html>
