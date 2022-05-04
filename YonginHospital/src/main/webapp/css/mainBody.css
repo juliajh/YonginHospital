@@ -15,8 +15,8 @@ html,body{
 .siteName{
 	width:450px;
 	position:absolute;
-	left:250px;
-	top:120px;
+	top:20%;
+	left:15%;
 	background-color:#5E8680;
 	border-radius: 50%;
 	font-size:5em;
@@ -30,7 +30,7 @@ html,body{
 {
 	position:absolute;
 	right:15%;
-	top:120px;
+	top:15%;
 	z-index:2;
 }
 

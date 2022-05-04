@@ -46,7 +46,7 @@
 		 
 		});	
 	</script>
-	<div class="container">
+	<div class="main-container">
 		<!-- 헤더의 크기만큼 빼준다. -->
 		<div class="content" style="height:calc(100vh - 65px);">
 			<div class="siteName">
