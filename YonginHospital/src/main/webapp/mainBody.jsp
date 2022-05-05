@@ -52,20 +52,25 @@
 			<div class="siteName">
 				<span><br>모두의<br/>병원</span><br><br>
 			</div>
-			<div class="siteExplain">
+			<div class="picture">
+				<img src="./media/medical.jpg"/>
 			</div>
+			<!-- 
 			<div class="picture_1">
 				<img src="./media/healthcare.png"/>
 			</div>
 			<div class="picture_2">
 				<img src="./media/health-insurance.png"/>
 			</div>
+			 -->
 		</div>
 		<div class="content" style="background-color:#BACEB0;">
+			<div class="subscribe-box">
+	    		<h2>병원 검색</h2>
+	    		<form class="subscribe"><input type="text" placeholder="검색할 병원을 입력하세요." autocomplete="off" required="required" /><button type="submit"> <span>검색</span></button></form>
+			</div>	
 		</div>
 		<div class="content" style="background-color:#5E8680;">
-		</div>
-		<div class="content">
 		</div>
 	</div>
 </body>
