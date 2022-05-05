@@ -1,0 +1,8 @@
+.mapContent{
+	position: absolute;
+	width: 70%;
+	height:450px;	
+	border: 1px solid black;
+	border-radius: 10px;
+	left:50%;
+}

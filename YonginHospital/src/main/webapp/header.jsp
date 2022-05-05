@@ -11,6 +11,7 @@
 	<div class="container">
 		<a href="index.jsp">HOME</a>
 		<a href="login.jsp">LOGIN</a><br>
+		<a href="map.jsp">map</a><br>
 	</div>
 </body>
 </html>
