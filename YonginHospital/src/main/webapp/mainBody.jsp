@@ -64,13 +64,25 @@
 			</div>
 			 -->
 		</div>
-		<div class="content" style="background-color:#BACEB0;">
+		<div class="content" style="background-color:#cad2c5;">
 			<div class="subscribe-box">
 	    		<h2>병원 검색</h2>
-	    		<form class="subscribe"><input type="text" placeholder="검색할 병원을 입력하세요." autocomplete="off" required="required" /><button type="submit"> <span>검색</span></button></form>
+	    		<form class="subscribe">
+	    			<input type="text" placeholder="검색할 병원을 입력하세요." autocomplete="off" required="required" />
+	    			<button type="submit">
+	    				<span>검색</span>
+	    			</button>
+	    		</form>
 			</div>	
 		</div>
-		<div class="content" style="background-color:#5E8680;">
+		<div class="content" style="background-color:#84a98c;">
+			<div class="select-box">
+				<select name="gu">
+					<option value="suZi">수지구</option>
+					<option value="giHeung">기흥구</option>
+					<option value="cheoIn">처인구</option>
+				</select>
+			</div>
 		</div>
 	</div>
 </body>
