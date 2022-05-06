@@ -53,6 +53,14 @@
 	var value;
 	
 	function handleOnChange(e) {
+		//기존 동 모두 지우기
+		var locations=document.getElementById("locations");
+		while (locations.hasChildNodes()) 
+		{
+			locations.removeChild(locations.firstChild );
+		}
+		
+		//selected 구 가져오기
 		value = e.value;
 		var selectedList;
   		if(value=="suzi")
@@ -62,12 +70,14 @@
   		else
   			selectedList=cheoin;
 
-  		let elements = locations.getElementsByClassName('loc');
-		for(var i=0;i<selectedList.length;i++)
+  		for(var i=0;i<selectedList.length;i++)
 		{
-			elements[i].innerText = selectedList[i];
+  			const newDiv = document.createElement('div');
+  			document.getElementById("locations").appendChild(newDiv);
+  			newDiv.innerText=selectedList[i];
 		}
 	}
+	
 </script>
 	
 	<div class="main-container">
@@ -101,8 +111,6 @@
 			</div>
 			<div class="location-box">
 				<div id="locations">
-		            <div class="loc">1</div>
-		            <div class="loc">1</div>
 		        </div>
 			</div>
 		</div>
