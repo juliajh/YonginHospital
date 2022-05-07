@@ -4,24 +4,30 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>search by map</title>
+<title>map</title>
 <link href="css/map.css" rel="stylesheet" type="text/css">
-<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=kgth4xgtim"></script>
 </head>
 <body>
-	<div class="mapBody">
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPUawaCdEV4yywr10s5MCKcCHwiBOfbUo&sensor=false&language=kr"></script> 
+	<script> 
+		function initialize() { 
+			var myLatlng = new google.maps.LatLng(37.544440974363575, 127.20878534137019 ); // 좌표값
+	  		var mapOptions = { 
+	        	zoom: 16, // 지도 확대레벨 조정
+	        	center: myLatlng, 
+	        	mapTypeId: google.maps.MapTypeId.ROADMAP 
+	  		} 
+	
+	  		var map = new google.maps.Map(document.getElementById('map'), mapOptions); 
+	  		var marker = new google.maps.Marker({ 
+				position: myLatlng, 
+				map: map // 마커에 마우스를 올렸을때 간략하게 표기될 설명글
+			}); 
+	  } 
+		window.onload = initialize;
+	</script>
+	 <div class="mapBody">
 		<div id="map" class="mapContent"></div>
 	</div>
-	<script>
-	var mapOptions = {
-	    center: new naver.maps.LatLng(37.3595704, 127.105399),
-	    zoom: 10
-	};
-	
-	var map = new naver.maps.Map('map', mapOptions);
-	</script>
 </body>
 </html>

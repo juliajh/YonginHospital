@@ -12,7 +12,7 @@
 		<a href="index.jsp">모두의 병원</a>
 		<a href="login.jsp">로그인</a>
 		<a href="login.jsp">회원가입</a>
-		<a href="index.jsp">병원검색</a>
+		<a href="searchPage.jsp">병원검색</a>
 		<a href="searchHospital.jsp">동네병원검색</a><br>
 	</div>
 </body>
