@@ -1,8 +1,13 @@
+.mapBody{
+	position:relative;
+}
+
 .mapContent{
-	position: absolute;
+	position:absolute;
+	left:15%;
 	width: 70%;
 	height:450px;	
 	border: 1px solid black;
 	border-radius: 10px;
-	left:50%;
+	
 }
