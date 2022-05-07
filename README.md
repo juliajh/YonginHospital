@@ -1,3 +1,2 @@
 # YonginHospital
-
-https://coolors.co/palette/dad7cd-a3b18a-588157-3a5a40-344e41
+https://coolors.co/palette/cad2c5-84a98c-52796f-354f52-2f3e46
