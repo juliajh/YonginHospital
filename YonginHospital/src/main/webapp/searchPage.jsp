@@ -12,7 +12,7 @@
 
 <div class="container">
 		<div class="row">
-			<form method="post" name="search" action="searchHospital.jsp">
+			<form method="post" name="search" action="searchPage.jsp">
 				<table class="pull-right">
 					<tr>
 						<td class = "search_text">병원 검색</td>
