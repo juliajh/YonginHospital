@@ -43,16 +43,13 @@
 		$html.animate({scrollTop : posTop});
 	 
 	});
-	
-	
-	var suzi=['풍덕천동','신봉동','죽전동','동천동','고기동','상현동','성복동'];
-	var giheung=['신갈동','영덕동','하갈동','구갈동','상갈동','보라동','지곡동','공세동','고매동','농서동',
-		'서천동','언남동','청덕동','마북동','동백동','중동','상하동','보정동'];
-	var cheoin=['포곡읍','모현읍','이동읍','남사읍','원삼면','백암면','양지면','중앙동','역북동','삼가동','유림동',''];
-	
+
 	var value;
+	var allResults=[];
+	var results=[];
 	
 	function handleOnChange(e) {
+		results=allResults;
 		//기존 동 모두 지우기
 		var locations=document.getElementById("locations");
 		while (locations.hasChildNodes()) 
@@ -60,6 +57,11 @@
 			locations.removeChild(locations.firstChild );
 		}
 		
+		var suzi=['풍덕천동','신봉동','죽전동','동천동','고기동','상현동','성복동'];
+		var giheung=['신갈동','영덕동','하갈동','구갈동','상갈동','보라동','지곡동','공세동','고매동','농서동',
+			'서천동','언남동','청덕동','마북동','동백동','중동','상하동','보정동'];
+		var cheoin=['포곡읍','모현읍','이동읍','남사읍','원삼면','백암면','양지면','중앙동','역북동','삼가동','유림동'];
+
 		//selected 구 가져오기
 		value = e.value;
 		var selectedList;
@@ -72,11 +74,43 @@
 
   		for(var i=0;i<selectedList.length;i++)
 		{
-  			const newDiv = document.createElement('div');
-  			document.getElementById("locations").appendChild(newDiv);
-  			newDiv.innerText=selectedList[i];
+  			const newInput=document.createElement("input");
+  			document.getElementById("locations").appendChild(newInput);
+  			newInput.setAttribute("type","checkbox");
+  			newInput.setAttribute("name","loc");
+  			newInput.setAttribute("onclick","getCheckboxValue()");
+  			newInput.setAttribute("value",selectedList[i]);
+  			const newLabel=document.createElement("label");
+  			document.getElementById("locations").appendChild(newLabel);
+  			newLabel.innerText=selectedList[i];
 		}
 	}
+	
+	
+	function getCheckboxValue()  {
+		  // 선택된 목록 가져오기
+		  allResults=results;
+		  const query = 'input[name="loc"]:checked';
+		  const selectedEls = 
+		      document.querySelectorAll(query);
+		  
+		  // 선택된 목록에서 value 찾기
+		  selectedEls.forEach((el) => {
+		    allResults.push(el.value);
+		  });
+		  
+		  
+		  const uniqueArr = allResults.filter((element, index) => {
+			    return allResults.indexOf(element) === index;
+			});
+		  
+		  allResults=uniqueArr;
+		  
+		  // 출력
+		  document.getElementById('result').innerText
+		    = allResults;
+	}
+
 	
 </script>
 	
@@ -101,17 +135,39 @@
 	    		</form>
 			</div>	
 		</div>
-		<div class="content" style="background-color:#84a98c;">
-			<div class="select-box">
-				<select name="gu" onchange="handleOnChange(this)">
-					<option value="suzi">수지구</option>
-					<option value="giheung">기흥구</option>
-					<option value="cheoin">처인구</option>
-				</select>
-			</div>
-			<div class="location-box">
-				<div id="locations">
-		        </div>
+		<div class="content" style="background-color:#84a98c; position:relative" >
+			<div class="content3">
+				<div class="select-box">
+					<select name="gu" onchange="handleOnChange(this)">
+						<option value="suzi">수지구</option>
+						<option value="giheung">기흥구</option>
+						<option value="cheoin">처인구</option>
+					</select>
+				</div>
+				<div class="location-box">
+					<form id="locations">
+						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="풍덕천동">
+						<label>풍덕천동</label>
+						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="신봉동">
+						<label>신봉동</label>
+						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="죽전동">
+						<label>죽전동</label>
+						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="동천동">
+						<label>동천동</label>
+						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="고기동">
+						<label>고기동</label>
+						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="상현동">
+						<label>상현동</label>
+						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="성복동">
+						<label>성복동</label>
+					</form>
+				</div>
+				<div id="result">
+					
+				</div>
+				<button class="search" type="button">
+				    Search
+				</button>
 			</div>
 		</div>
 	</div>
