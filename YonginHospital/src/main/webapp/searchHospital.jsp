@@ -9,7 +9,7 @@
 <body>
 
 <jsp:include page="header.jsp"/>
-<jsp:include page="hospitalForm.jsp"/>
+<jsp:include page="hashtag.jsp"/>
 <jsp:include page="map.jsp"/>
 
 </body>

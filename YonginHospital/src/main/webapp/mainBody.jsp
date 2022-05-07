@@ -136,6 +136,12 @@
 			</div>	
 		</div>
 		<div class="content" style="background-color:#84a98c; position:relative" >
+			<!-- 재희 - form -->
+			<div class="searchBoxonMain">
+				<jsp:include page="hospitalForm.jsp"/>
+			</div>
+			
+			<!-- 주히 - 이전 코드 
 			<div class="content3">
 				<div class="select-box">
 					<select name="gu" onchange="handleOnChange(this)">
@@ -168,7 +174,7 @@
 				<button class="search" type="button">
 				    Search
 				</button>
-			</div>
+			</div>-->
 		</div>
 	</div>
 </body>

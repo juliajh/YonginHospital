@@ -1,12 +1,13 @@
 .mapBody{
 	position:relative;
+	margin-top: 12px;
 }
 
 .mapContent{
 	position:absolute;
 	left:15%;
 	width: 70%;
-	height:450px;	
+	height:400px;	
 	border: 1px solid black;
 	border-radius: 10px;
 	

@@ -1,9 +1,6 @@
 form{
-	margin: 15px;
 	position:relative;
 	justify-content: center;
-	left: 13%;
-	width: 60%;
 	display: flex;
 }
 

@@ -1,0 +1,15 @@
+.hashtagBox{
+	position:relative;
+	justify-content: center;
+	display: flex;
+}
+.hashtagContent{
+	margin: 10px;
+	font-size: 100%;
+	font-weight: 600;
+	text-align: center;
+	padding: 10px;
+	border: 0px;
+	border-radius: 10px;
+	background-color: #cfebd9;
+}

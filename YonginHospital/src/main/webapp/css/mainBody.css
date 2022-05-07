@@ -163,5 +163,11 @@ html,body{
 	transform: translateX(160px);
 }
 
+.searchBoxonMain{
+	position: relative;
+	justify-content: center;
+	top: 10%;
+}
+
 /*content3*/
 
