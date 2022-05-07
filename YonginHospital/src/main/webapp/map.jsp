@@ -12,7 +12,9 @@
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=kgth4xgtim"></script>
 </head>
 <body>
-	<div class="mapBody" id="map"></div>
+	<div class="mapBody">
+		<div id="map" class="mapContent"></div>
+	</div>
 	<script>
 	var mapOptions = {
 	    center: new naver.maps.LatLng(37.3595704, 127.105399),

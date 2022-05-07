@@ -13,8 +13,7 @@
 		<a href="login.jsp">로그인</a>
 		<a href="login.jsp">회원가입</a>
 		<a href="index.jsp">병원검색</a>
-		<a href="index.jsp">동네병원검색</a>
-		<a href="map.jsp">map</a><br>
+		<a href="searchHospital.jsp">동네병원검색</a><br>
 	</div>
 </body>
 </html>
