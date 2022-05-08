@@ -45,16 +45,17 @@
 	});
 
 	var value;
-	var allResults=[];
-	var results=[];
 	
+	function resultReset(){
+		document.getElementById('result').innerText="";
+	}
 	function handleOnChange(e) {
-		results=allResults;
+		resultReset();
 		//기존 동 모두 지우기
-		var locations=document.getElementById("locations");
+		var locations=document.getElementById("bldg-box");
 		while (locations.hasChildNodes()) 
 		{
-			locations.removeChild(locations.firstChild );
+			locations.removeChild(locations.firstChild);
 		}
 		
 		var suzi=['풍덕천동','신봉동','죽전동','동천동','고기동','상현동','성복동'];
@@ -75,40 +76,35 @@
   		for(var i=0;i<selectedList.length;i++)
 		{
   			const newInput=document.createElement("input");
-  			document.getElementById("locations").appendChild(newInput);
+  			document.getElementById("bldg-box").appendChild(newInput);
   			newInput.setAttribute("type","checkbox");
-  			newInput.setAttribute("name","loc");
+  			newInput.setAttribute("name","bldg");
   			newInput.setAttribute("onclick","getCheckboxValue()");
   			newInput.setAttribute("value",selectedList[i]);
   			const newLabel=document.createElement("label");
-  			document.getElementById("locations").appendChild(newLabel);
+  			document.getElementById("bldg-box").appendChild(newLabel);
   			newLabel.innerText=selectedList[i];
 		}
+  		
 	}
 	
 	
 	function getCheckboxValue()  {
+		 allResults=[]
 		  // 선택된 목록 가져오기
-		  allResults=results;
-		  const query = 'input[name="loc"]:checked';
-		  const selectedEls = 
-		      document.querySelectorAll(query);
-		  
-		  // 선택된 목록에서 value 찾기
-		  selectedEls.forEach((el) => {
-		    allResults.push(el.value);
-		  });
-		  
-		  
-		  const uniqueArr = allResults.filter((element, index) => {
-			    return allResults.indexOf(element) === index;
-			});
-		  
-		  allResults=uniqueArr;
-		  
-		  // 출력
-		  document.getElementById('result').innerText
-		    = allResults;
+		  var loc_list = document.getElementsByName("bldg");
+		  for(var i=0;i<loc_list.length;i++){
+			if(loc_list[i].checked == true) {
+				allResults.push(loc_list[i].value);
+			}
+			else{
+				if(loc_list[i].value in allResults){
+					allResults.pop(loc_list[i].value);
+				}
+			}
+		  }
+
+		  document.getElementById('result').innerText=allResults;
 	}
 
 	
@@ -136,45 +132,50 @@
 			</div>	
 		</div>
 		<div class="content" style="background-color:#84a98c; position:relative" >
-			<!-- 재희 - form -->
-			<div class="searchBoxonMain">
-				<jsp:include page="hospitalForm.jsp"/>
-			</div>
-			
-			<!-- 주히 - 이전 코드 
 			<div class="content3">
-				<div class="select-box">
-					<select name="gu" onchange="handleOnChange(this)">
-						<option value="suzi">수지구</option>
-						<option value="giheung">기흥구</option>
-						<option value="cheoin">처인구</option>
-					</select>
-				</div>
-				<div class="location-box">
-					<form id="locations">
-						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="풍덕천동">
+				<form id="locations" action="searchHospital.jsp" method="post">
+					<div id="select-box">
+						<select name="gu" onchange="handleOnChange(this)">
+							<option value="수지구">수지구</option>
+							<option value="기흥구">기흥구</option>
+							<option value="처인구">처인구</option>
+						</select>
+					</div>
+					<div id="bldg-box">
+						<input type="checkbox" name="bldg" onclick='getCheckboxValue()' value="풍덕천동">
 						<label>풍덕천동</label>
-						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="신봉동">
+						<input type="checkbox" name="bldg" onclick='getCheckboxValue()' value="신봉동">
 						<label>신봉동</label>
-						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="죽전동">
+						<input type="checkbox" name="bldg" onclick='getCheckboxValue()' value="죽전동">
 						<label>죽전동</label>
-						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="동천동">
+						<input type="checkbox" name="bldg" onclick='getCheckboxValue()' value="동천동">
 						<label>동천동</label>
-						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="고기동">
+						<input type="checkbox" name="bldg" onclick='getCheckboxValue()' value="고기동">
 						<label>고기동</label>
-						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="상현동">
+						<input type="checkbox" name="bldg" onclick='getCheckboxValue()' value="상현동">
 						<label>상현동</label>
-						<input type="checkbox" name="loc" onclick='getCheckboxValue()' value="성복동">
+						<input type="checkbox" name="bldg" onclick='getCheckboxValue()' value="성복동">
 						<label>성복동</label>
-					</form>
-				</div>
+					</div>
+					<div id="hospital-box">
+						<select name="hospital">
+							<option value="안과">안과</option>
+							<option value="치과">치과</option>
+							<option value="피부과">피부과</option>
+							<option value="산부인과">산부인과</option>
+							<option value="외과">일반외과</option>
+							<option value="내과">내과</option>
+							<option value="소아과">소아과</option>
+							<option value="요양병원">요양병원</option>
+							<option value="정신건강의학과">정신건강의학과</option>
+						</select>
+					</div>
+					<input type="submit"/>
+					<input type="reset" onclick="resultReset()"/>
+				</form>					
 				<div id="result">
-					
 				</div>
-				<button class="search" type="button">
-				    Search
-				</button>
-			</div>-->
+			</div>
 		</div>
 	</div>
 </body>
