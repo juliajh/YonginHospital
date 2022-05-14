@@ -22,12 +22,13 @@
 	}
 	
 	function handleOnChange(e) {
-		resultReset()
+		document.getElementById('result').innerText="";
+
 		//기존 동 모두 지우기
 		var locations=document.getElementById("bldg-box");
 		while (locations.hasChildNodes()) 
 		{
-			locations.removeChild(locations.firstChild);
+			locations.removeChild(locations.lastChild);
 		}
 		
 		var suzi=['풍덕천동','신봉동','죽전동','동천동','고기동','상현동','성복동'];

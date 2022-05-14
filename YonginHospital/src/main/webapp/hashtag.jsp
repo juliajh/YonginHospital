@@ -15,9 +15,18 @@
 	String gu=request.getParameter("gu");
 	String[] bldg=request.getParameterValues("bldg");
 	String hospital = request.getParameter("hospital");
-	out.println(gu + " ");
-	for(String s: bldg) out.println(s + " ");
-	out.println(hospital + " ");
 %>
 </body>
+<div class="hashtagBox">
+	<span class="hashtagContent">#<%=gu %></span>
+	<%
+		for(int i = 0;i<bldg.length;i++)
+		{
+	%>
+		<span class="hashtagContent">#<%=bldg[i] %></span>
+	<%
+		}
+	%>
+	<span class="hashtagContent">#<%=hospital %></span>
+</div>
 </html>
