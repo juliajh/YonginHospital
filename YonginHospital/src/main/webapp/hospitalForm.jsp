@@ -9,44 +9,110 @@
 <link href="css/hospitalForm.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<script>
-function guChange(e){
-	var v_gu0 = ["동 선택X"];
-	var v_gu1 =["동 선택","신갈동","영덕1동","영덕2동","구갈동","상갈동","보라동","기흥동","서농동","구성동","마북동","동백1동","동백2동",
-			"동백3동","상하동","보정동"];
-	var v_gu2 =["동 선택","풍덕천1동","풍덕천2동","신봉동","죽전1동","죽전2동","죽전3동","동천동","상현1동","상현2동","상현3동","성복동"];
-	var v_gu3 = ["동 선택","포곡읍","모현읍","이동읍","남사읍","원삼면","백암면","양지면","중앙동","역북동","삼가동","유림동","동부동"];
-	var target = document.getElementById("Bldg");
+<!-- <head></head> 사이에 넣으면 웹브라우저가 HTML 문서를 해석(Parsing) 할 때 
+<script> 태그를 만나면 그 안에 있는 JavaScript 의 처리가 끝날 때 까지 
+다른 HTML의 해석을 멈추기 때문에 HTML 페이지가 화면에 완성되기까지 더 오래 걸린다.-->
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	var value;
 	
-	if(e.value=="기흥구") var d = v_gu1;
-	else if(e.value=="수지구") var d = v_gu2;
-	else if(e.value=="처인구") var d = v_gu3;
-	else var d = v_gu0;
-	
-	target.options.length = 0;
-	
-	for(var x in d){
-		var opt = document.createElement("option");
-		opt.value = d[x];
-		opt.innerHTML = d[x];
-		target.appendChild(opt);
+	function resultReset(){
+		document.getElementById('result').innerText="";
+		document.hospitalForm.reset();
 	}
-}
+	
+	function handleOnChange(e) {
+		resultReset()
+		//기존 동 모두 지우기
+		var locations=document.getElementById("bldg-box");
+		while (locations.hasChildNodes()) 
+		{
+			locations.removeChild(locations.firstChild);
+		}
+		
+		var suzi=['풍덕천동','신봉동','죽전동','동천동','고기동','상현동','성복동'];
+		var giheung=['신갈동','영덕동','하갈동','구갈동','상갈동','보라동','지곡동','공세동','고매동','농서동',
+			'서천동','언남동','청덕동','마북동','동백동','중동','상하동','보정동'];
+		var cheoin=['포곡읍','모현읍','이동읍','남사읍','원삼면','백암면','양지면','중앙동','역북동','삼가동','유림동'];
 
-function resetBtn(){
-	$("#tmpSendFrm")[0].reset();
-}
+		//selected 구 가져오기
+		value = e.value;
+
+  		if(value=="suzi")
+			var selectedList=suzi;
+  		else if(value=="giheung")
+  			var selectedList=giheung;
+  		else
+  			var selectedList=cheoin;
+
+  		for(var i=0;i<selectedList.length;i++)
+		{
+  			var li=document.createElement("li");
+  			const newInput=document.createElement("input");
+  			newInput.setAttribute("type","checkbox");
+  			newInput.setAttribute("name","bldg");
+  			newInput.setAttribute("onclick","getCheckboxValue()");
+  			newInput.setAttribute("value",selectedList[i]);
+  			newInput.setAttribute("id","checkbox_"+i);
+  			li.appendChild(newInput);
+  			const newLabel=document.createElement("label");
+  			newLabel.setAttribute("for","checkbox_"+i);
+  			li.appendChild(newLabel);
+  			newLabel.innerText=selectedList[i];
+  			locations.appendChild(li);
+		}
+  		
+	}
+	
+	
+	function getCheckboxValue()  {
+		 allResults=[]
+		  // 선택된 목록 가져오기
+		  var loc_list = document.getElementsByName("bldg");
+		  for(var i=0;i<loc_list.length;i++){
+			if(loc_list[i].checked == true) {
+				allResults.push(loc_list[i].value);
+			}
+			else{
+				if(loc_list[i].value in allResults){
+					allResults.pop(loc_list[i].value);
+				}
+			}
+		  }
+
+		  document.getElementById('result').innerText=allResults;
+	}
+
+	
 </script>
-	<form action="searchHospital.jsp" name="id" id="tmpSendFrm" method="POST">    
-		<select name="gu" class="selectBox" onChange="guChange(this)">
-			<option value="" class="optionBox">구 선택</option>
-			<option value="기흥구" class="optionBox">기흥구</option>
-			<option value="수지구" class="optionBox">수지구</option>
-			<option value="처인구" class="optionBox">처인구</option>
-		</select>
-		<select id="Bldg" name="bldg" class="selectBox">
-			<option value="" class="optionBox">동 선택X</option>
-		</select>
+
+<div class="content3">
+	<form name="hospitalForm" id="locations" action="searchHospital.jsp" method="post">
+		<div id="select-box">
+			<select name="gu" class="selectBox" onchange="handleOnChange(this)">
+				<option value="수지구" class="optionBox" >수지구</option>
+				<option value="기흥구" class="optionBox" >기흥구</option>
+				<option value="처인구" class="optionBox">처인구</option>
+			</select>
+		</div>
+		<div>
+			<ul class="ks-cboxtags" id="bldg-box">
+				<li><input type="checkbox" id="checkbox_0" name="bldg" onclick='getCheckboxValue()' value="풍덕천동">
+					<label for="checkbox_0">풍덕천동</label></li>
+				<li><input type="checkbox" id="checkbox_1" name="bldg" onclick='getCheckboxValue()' value="신봉동">
+					<label for="checkbox_1">신봉동</label></li>
+				<li><input type="checkbox" id="checkbox_2" name="bldg" onclick='getCheckboxValue()' value="죽전동">
+					<label for="checkbox_2">죽전동</label></li>
+				<li><input type="checkbox" id="checkbox_3" name="bldg" onclick='getCheckboxValue()' value="동천동">
+					<label for="checkbox_3">동천동</label></li>
+				<li><input type="checkbox" id="checkbox_4" name="bldg" onclick='getCheckboxValue()' value="고기동">
+					<label for="checkbox_4">고기동</label></li>
+				<li><input type="checkbox" id="checkbox_5" name="bldg" onclick='getCheckboxValue()' value="상현동">
+					<label for="checkbox_5">상현동</label></li>
+				<li><input type="checkbox" id="checkbox_6" name="bldg" onclick='getCheckboxValue()' value="성복동">
+					<label for="checkbox_6">성복동</label></li>
+			</ul>
+		</div>
 		<select name="hospital" class="selectBox">
 			<option value="" class="optionBox">병원 종류</option>
 			<option value="안과" class="optionBox">안과</option>
@@ -67,8 +133,11 @@ function resetBtn(){
 			<option value="정신건강의학과" class="optionBox">정신건강의학과</option>
 		</select>
 		<input type="image" src="https://cdn-icons-png.flaticon.com/512/149/149852.png" name="submit" align="absmiddle" class="btn">
-		<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resetBtn()" class="btn">
-		<!-- <input type="image" src="https://cdn-icons-png.flaticon.com/512/560/560450.png" name="reset" align="absmiddle" class="btn"> -->
-	</form>	
+		<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="btn">
+		
+	</form>					
+	<div id="result">
+	</div>
+</div>
 </body>
 </html>
