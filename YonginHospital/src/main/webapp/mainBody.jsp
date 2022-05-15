@@ -14,7 +14,6 @@
 다른 HTML의 해석을 멈추기 때문에 HTML 페이지가 화면에 완성되기까지 더 오래 걸린다.-->
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	/*
 	//기본 이벤트 제거
 	window.addEventListener("wheel", function(e){
 		e.preventDefault();
@@ -44,12 +43,11 @@
 		$html.animate({scrollTop : posTop});
 	 
 	});
-	*/
 </script>
 	
 	<div class="main-container">
 		<!-- 헤더의 크기만큼 빼준다. -->
-		<div class="content" style="height:calc(100vh - 65px);">
+		<div class="content">
 			<div class="siteName">
 				<span><br>모두의<br/>병원</span><br><br>
 			</div>
@@ -60,7 +58,7 @@
 		<div class="content" style="background-color:#cad2c5;">
 			<jsp:include page="detailHospitalForm.jsp"/>
 		</div>
-		<div class="content" style="background-color:#84a98c; position:relative" >
+		<div class="content" style="background-color:#84a98c;">
 			<jsp:include page="hospitalForm.jsp"/>
 		</div>
 	</div>

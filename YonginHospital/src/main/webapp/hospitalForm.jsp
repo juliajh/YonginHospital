@@ -92,6 +92,7 @@
 
 <div class="content3">
 	<form name="hospitalForm" id="locations" action="searchHospital.jsp" method="post">
+		<div style="margin-bottom:70px;"><span style="font-size:2.5rem;">동네 주변 병원을 찾아보고 후기를 볼 수 있어요</span></div>
 		<div class="gu-box" id="select-box">
 			<select name="gu" class="selectBox" onchange="handleOnChange(this)">
 				<option value="수지구" class="optionBox">수지구</option>
@@ -116,7 +117,7 @@
 				<li><input type="checkbox" id="checkbox_6" name="bldg" onclick='getCheckboxValue()' value="성복동">
 					<label for="checkbox_6">성복동</label></li>
 			</ul>
-			<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="btn">
+			<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="resetBtn">
 		</div>
 		<div class="category">
 			<select name="hospital" class="selectBox">
