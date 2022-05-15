@@ -17,7 +17,14 @@
 	var value;
 	
 	function resultReset(){
-		document.hospitalForm.reset();
+		  var loc_list = document.getElementsByName("bldg");
+		  for(var i=0;i<loc_list.length;i++)
+		  {
+			if(loc_list[i].checked == true)
+			{
+				loc_list[i].checked = false;
+			}
+		  }
 	}
 	
 	function handleOnChange(e) {
@@ -109,10 +116,10 @@
 				<li><input type="checkbox" id="checkbox_6" name="bldg" onclick='getCheckboxValue()' value="성복동">
 					<label for="checkbox_6">성복동</label></li>
 			</ul>
+			<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="btn">
 		</div>
 		<div class="category">
 			<select name="hospital" class="selectBox">
-				<option value="" class="optionBox">병원 종류</option>
 				<option value="안과" class="optionBox">안과</option>
 				<option value="치과" class="optionBox">치과</option>
 				<option value="피부과" class="optionBox">피부과</option>
@@ -131,9 +138,9 @@
 				<option value="정신건강의학과" class="optionBox">정신건강의학과</option>
 			</select>
 		</div>
-		<input type="image" src="https://cdn-icons-png.flaticon.com/512/149/149852.png" name="submit" align="absmiddle" class="btn">
-		<!-- <img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="btn">
-		 -->
+		<button type="submit" class="submitBtn">
+   				<span>검색</span>
+ 		</button>
 	</form>
 </div>
 </body>
