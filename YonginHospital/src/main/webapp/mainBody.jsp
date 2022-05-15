@@ -56,20 +56,10 @@
 			</div>
 		</div>
 		<div class="content" style="background-color:#cad2c5;">
-			<div class="subscribe-box">
-	    		<h2>병원 검색</h2>
-	    		<form class="subscribe">
-	    			<input type="text" placeholder="검색할 병원을 입력하세요." autocomplete="off" required="required" />
-	    			<button type="submit">
-	    				<span>검색</span>
-	    			</button>
-	    		</form>
-			</div>	
+			<jsp:include page="detailHospitalForm.jsp"/>
 		</div>
 		<div class="content" style="background-color:#84a98c; position:relative" >
-			<div class="content3">
-				<jsp:include page="hospitalForm.jsp"/>
-			</div>
+			<jsp:include page="hospitalForm.jsp"/>
 		</div>
 	</div>
 </body>

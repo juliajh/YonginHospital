@@ -39,9 +39,9 @@
 		//selected 구 가져오기
 		value = e.value;
 
-  		if(value=="suzi")
+  		if(value=="수지구")
 			var selectedList=suzi;
-  		else if(value=="giheung")
+  		else if(value=="기흥구")
   			var selectedList=giheung;
   		else
   			var selectedList=cheoin;
