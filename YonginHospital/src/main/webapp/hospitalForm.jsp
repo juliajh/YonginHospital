@@ -17,15 +17,13 @@
 	var value;
 	
 	function resultReset(){
-		document.getElementById('result').innerText="";
 		document.hospitalForm.reset();
 	}
 	
 	function handleOnChange(e) {
-		document.getElementById('result').innerText="";
 
 		//기존 동 모두 지우기
-		var locations=document.getElementById("bldg-box");
+		var locations=document.getElementById("bldgs");
 		while (locations.hasChildNodes()) 
 		{
 			locations.removeChild(locations.lastChild);
@@ -80,8 +78,6 @@
 				}
 			}
 		  }
-
-		  document.getElementById('result').innerText=allResults;
 	}
 
 	
@@ -89,15 +85,15 @@
 
 <div class="content3">
 	<form name="hospitalForm" id="locations" action="searchHospital.jsp" method="post">
-		<div id="select-box">
+		<div class="gu-box" id="select-box">
 			<select name="gu" class="selectBox" onchange="handleOnChange(this)">
-				<option value="수지구" class="optionBox" >수지구</option>
-				<option value="기흥구" class="optionBox" >기흥구</option>
+				<option value="수지구" class="optionBox">수지구</option>
+				<option value="기흥구" class="optionBox">기흥구</option>
 				<option value="처인구" class="optionBox">처인구</option>
 			</select>
 		</div>
-		<div>
-			<ul class="ks-cboxtags" id="bldg-box">
+		<div class="bldg-box">
+			<ul class="ks-cboxtags" id="bldgs">
 				<li><input type="checkbox" id="checkbox_0" name="bldg" onclick='getCheckboxValue()' value="풍덕천동">
 					<label for="checkbox_0">풍덕천동</label></li>
 				<li><input type="checkbox" id="checkbox_1" name="bldg" onclick='getCheckboxValue()' value="신봉동">
@@ -114,31 +110,31 @@
 					<label for="checkbox_6">성복동</label></li>
 			</ul>
 		</div>
-		<select name="hospital" class="selectBox">
-			<option value="" class="optionBox">병원 종류</option>
-			<option value="안과" class="optionBox">안과</option>
-			<option value="치과" class="optionBox">치과</option>
-			<option value="피부과" class="optionBox">피부과</option>
-			<option value="산부인과" class="optionBox">산부인과</option>
-			<option value="유방외과" class="optionBox">유방외과</option>
-			<option value="성형외과" class="optionBox">성형외과</option>
-			<option value="대장항문외과" class="optionBox">대장항문외과</option>
-			<option value="정형외과" class="optionBox">정형외과</option>
-			<option value="일반외과" class="optionBox">일반외과</option>
-			<option value="내과" class="optionBox">내과</option>
-			<option value="신경외과" class="optionBox">신경외과</option>
-			<option value="흉부외과" class="optionBox">흉부외과</option>
-			<option value="소아과" class="optionBox">소아과</option>
-			<option value="암센터" class="optionBox">암센터</option>
-			<option value="요양병원" class="optionBox">요양병원</option>
-			<option value="정신건강의학과" class="optionBox">정신건강의학과</option>
-		</select>
+		<div class="category">
+			<select name="hospital" class="selectBox">
+				<option value="" class="optionBox">병원 종류</option>
+				<option value="안과" class="optionBox">안과</option>
+				<option value="치과" class="optionBox">치과</option>
+				<option value="피부과" class="optionBox">피부과</option>
+				<option value="산부인과" class="optionBox">산부인과</option>
+				<option value="유방외과" class="optionBox">유방외과</option>
+				<option value="성형외과" class="optionBox">성형외과</option>
+				<option value="대장항문외과" class="optionBox">대장항문외과</option>
+				<option value="정형외과" class="optionBox">정형외과</option>
+				<option value="일반외과" class="optionBox">일반외과</option>
+				<option value="내과" class="optionBox">내과</option>
+				<option value="신경외과" class="optionBox">신경외과</option>
+				<option value="흉부외과" class="optionBox">흉부외과</option>
+				<option value="소아과" class="optionBox">소아과</option>
+				<option value="암센터" class="optionBox">암센터</option>
+				<option value="요양병원" class="optionBox">요양병원</option>
+				<option value="정신건강의학과" class="optionBox">정신건강의학과</option>
+			</select>
+		</div>
 		<input type="image" src="https://cdn-icons-png.flaticon.com/512/149/149852.png" name="submit" align="absmiddle" class="btn">
-		<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="btn">
-		
-	</form>					
-	<div id="result">
-	</div>
+		<!-- <img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="btn">
+		 -->
+	</form>
 </div>
 </body>
 </html>

@@ -14,6 +14,7 @@
 다른 HTML의 해석을 멈추기 때문에 HTML 페이지가 화면에 완성되기까지 더 오래 걸린다.-->
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+	/*
 	//기본 이벤트 제거
 	window.addEventListener("wheel", function(e){
 		e.preventDefault();
@@ -43,6 +44,7 @@
 		$html.animate({scrollTop : posTop});
 	 
 	});
+	*/
 </script>
 	
 	<div class="main-container">
