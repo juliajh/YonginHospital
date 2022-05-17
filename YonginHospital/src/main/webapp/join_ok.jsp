@@ -1,14 +1,10 @@
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.Connection"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import="java.sql.*"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
@@ -21,67 +17,64 @@
 	private static final String DB_URL = "jdbc:mysql://localhost/" + DB_SCHEMAS + DB_PROPERTIES; 
 %>
 
-<%
+<% 
 	request.setCharacterEncoding("UTF-8");
 
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
-    // DBì—°ê²°ì— í•„ìš”í•œ ë³€ìˆ˜ ì„ ì–¸
-
+	String name = request.getParameter("name");
+	String age = request.getParameter("age");
+	String gender = request.getParameter("gender");
+	
 	String USER = "root";
 	String PASSWORD = "rlarjsdn99";
+		
 	Connection conn = null;
 	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	
-	String sql = "select * from members where id = ? and pw = ?";
-	
-	try{
-		// ë“œë¼ì´ë²„ í˜¸ì¶œ
-		Class.forName("com.mysql.cj.jdbc.Driver");
 		
-		// conn ìƒì„±
+	String sql = "insert into members values(?, ?, ?, ?, ?)";
+		
+	try{
+		// 1. µå¶óÀÌ¹ö ·Îµå
+		Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		// 2. conn »ı¼º
 		
 		conn = DriverManager.getConnection(DB_URL, USER, PASSWORD); 
-		// pstmt ìƒì„±
+			
+		// 3. pstmt »ı¼º
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, pw);
-		
-		// sqlì‹¤í–‰
-		rs = pstmt.executeQuery();
-		
-		if(rs.next()){ // ë¡œê·¸ì¸ ì„±ê³µ(ì¸ì¦ì˜ ìˆ˜ë‹¨ session)
-			id = rs.getString("id");
-			String name = rs.getString("name");
-		
-			session.setAttribute("user_id", id);
-			session.setAttribute("user_name", name);
+		pstmt.setString(3, name);
+		pstmt.setString(4, age);
+		pstmt.setString(5, gender);
 			
-			response.sendRedirect("index.jsp"); // í˜ì´ì§€ì´ë™
+		// 4. sql¹® ½ÇÇà
+		int result = pstmt.executeUpdate();
 			
-		} else{ // ë¡œê·¸ì¸ ì‹¤íŒ¨
-			%>
-			<%
+		if(result == 1){ 
+		
+		} else{ // ½ÇÆĞ
+			response.sendRedirect("join_fail.jsp");
 		}
+			
 	} catch(Exception e){
 		e.printStackTrace();
-		response.sendRedirect("login.jsp"); // ì—ëŸ¬ê°€ ë‚œ ê²½ìš°ë„ ë¦¬ë‹¤ì´ë ‰íŠ¸
 	} finally{
 		try{
 			if(conn != null) conn.close();
 			if(pstmt != null) pstmt.close();
-			if(rs != null) rs.close();
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 	}
- %>
- <script>
-	alert('ë¡œê·¸ì¸ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤');
+	%>
+	<script>
+	alert('¼º°øÀûÀ¸·Î È¸¿ø°¡ÀÔÀÌ µÇ¾ú½À´Ï´Ù.');
 	
 	location.href='login.jsp';
-</script>
- 
+	</script>
+
 </body>
 </html>

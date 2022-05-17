@@ -20,7 +20,7 @@
 	<header>
 		<a href="index.jsp">모두의 병원</a>
 		<a href="login.jsp">로그인</a>
-		<a href="login.jsp">회원가입</a>
+		<a href="join.jsp">회원가입</a>
 		<a href="index.jsp">병원검색</a>
 		<a onClick="moveToTopSmooth()">동네병원검색</a><br>
 	</header>
