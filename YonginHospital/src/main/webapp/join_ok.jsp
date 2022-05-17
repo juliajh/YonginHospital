@@ -52,7 +52,7 @@
 			
 		// 4. sql문 실행
 		int result = pstmt.executeUpdate();
-			
+		
 		if(result == 1){ 
 		
 		} else{ // 실패
