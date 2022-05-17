@@ -25,7 +25,6 @@
 	var lastPage = $(".content").length;  //content의 개수
 	
 	//문서(페이지)가 로드되면 첫 페이지 시작
-	$html.animate({scrollTop:0},10); 
 
 	//마우스 휠 굴렸을 때 이벤트 넣기
 	$(window).on("wheel", function(e){
@@ -46,7 +45,6 @@
 </script>
 	
 	<div class="main-container">
-		<!-- 헤더의 크기만큼 빼준다. -->
 		<div class="content">
 			<div class="siteName">
 				<span><br>모두의<br/>병원</span><br><br>

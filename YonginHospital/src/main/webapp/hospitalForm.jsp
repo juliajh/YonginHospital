@@ -89,60 +89,59 @@
 
 	
 </script>
-
-<div class="content3">
-	<form name="hospitalForm" id="locations" action="searchHospital.jsp" method="post">
-		<div style="margin-bottom:70px;"><span style="font-size:2.5rem;">동네 주변 병원을 찾아보고 후기를 볼 수 있어요</span></div>
-		<div class="gu-box" id="select-box">
-			<select name="gu" class="selectBox" onchange="handleOnChange(this)">
-				<option value="수지구" class="optionBox">수지구</option>
-				<option value="기흥구" class="optionBox">기흥구</option>
-				<option value="처인구" class="optionBox">처인구</option>
-			</select>
-		</div>
-		<div class="bldg-box">
-			<ul class="ks-cboxtags" id="bldgs">
-				<li><input type="checkbox" id="checkbox_0" name="bldg" onclick='getCheckboxValue()' value="풍덕천동">
-					<label for="checkbox_0">풍덕천동</label></li>
-				<li><input type="checkbox" id="checkbox_1" name="bldg" onclick='getCheckboxValue()' value="신봉동">
-					<label for="checkbox_1">신봉동</label></li>
-				<li><input type="checkbox" id="checkbox_2" name="bldg" onclick='getCheckboxValue()' value="죽전동">
-					<label for="checkbox_2">죽전동</label></li>
-				<li><input type="checkbox" id="checkbox_3" name="bldg" onclick='getCheckboxValue()' value="동천동">
-					<label for="checkbox_3">동천동</label></li>
-				<li><input type="checkbox" id="checkbox_4" name="bldg" onclick='getCheckboxValue()' value="고기동">
-					<label for="checkbox_4">고기동</label></li>
-				<li><input type="checkbox" id="checkbox_5" name="bldg" onclick='getCheckboxValue()' value="상현동">
-					<label for="checkbox_5">상현동</label></li>
-				<li><input type="checkbox" id="checkbox_6" name="bldg" onclick='getCheckboxValue()' value="성복동">
-					<label for="checkbox_6">성복동</label></li>
-			</ul>
-			<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="resetBtn">
-		</div>
-		<div class="category">
-			<select name="hospital" class="selectBox">
-				<option value="안과" class="optionBox">안과</option>
-				<option value="치과" class="optionBox">치과</option>
-				<option value="피부과" class="optionBox">피부과</option>
-				<option value="산부인과" class="optionBox">산부인과</option>
-				<option value="유방외과" class="optionBox">유방외과</option>
-				<option value="성형외과" class="optionBox">성형외과</option>
-				<option value="대장항문외과" class="optionBox">대장항문외과</option>
-				<option value="정형외과" class="optionBox">정형외과</option>
-				<option value="일반외과" class="optionBox">일반외과</option>
-				<option value="내과" class="optionBox">내과</option>
-				<option value="신경외과" class="optionBox">신경외과</option>
-				<option value="흉부외과" class="optionBox">흉부외과</option>
-				<option value="소아과" class="optionBox">소아과</option>
-				<option value="암센터" class="optionBox">암센터</option>
-				<option value="요양병원" class="optionBox">요양병원</option>
-				<option value="정신건강의학과" class="optionBox">정신건강의학과</option>
-			</select>
-		</div>
-		<button type="submit" class="submitBtn">
-   				<span>검색</span>
- 		</button>
-	</form>
-</div>
+	<div class="content3">
+		<form name="hospitalForm" id="locations" action="searchHospital.jsp" method="post">
+			<div style="padding-top:100px; margin-bottom:30px;"><span style="font-size:2.5rem;">동네 주변 병원을 찾아보고 후기를 볼 수 있어요</span></div>
+			<div class="gu-box" id="select-box">
+				<select name="gu" class="selectBox" onchange="handleOnChange(this)">
+					<option value="수지구" class="optionBox">수지구</option>
+					<option value="기흥구" class="optionBox">기흥구</option>
+					<option value="처인구" class="optionBox">처인구</option>
+				</select>
+			</div>
+			<div class="bldg-box">
+				<ul class="ks-cboxtags" id="bldgs">
+					<li><input type="checkbox" id="checkbox_0" name="bldg" onclick='getCheckboxValue()' value="풍덕천동">
+						<label for="checkbox_0">풍덕천동</label></li>
+					<li><input type="checkbox" id="checkbox_1" name="bldg" onclick='getCheckboxValue()' value="신봉동">
+						<label for="checkbox_1">신봉동</label></li>
+					<li><input type="checkbox" id="checkbox_2" name="bldg" onclick='getCheckboxValue()' value="죽전동">
+						<label for="checkbox_2">죽전동</label></li>
+					<li><input type="checkbox" id="checkbox_3" name="bldg" onclick='getCheckboxValue()' value="동천동">
+						<label for="checkbox_3">동천동</label></li>
+					<li><input type="checkbox" id="checkbox_4" name="bldg" onclick='getCheckboxValue()' value="고기동">
+						<label for="checkbox_4">고기동</label></li>
+					<li><input type="checkbox" id="checkbox_5" name="bldg" onclick='getCheckboxValue()' value="상현동">
+						<label for="checkbox_5">상현동</label></li>
+					<li><input type="checkbox" id="checkbox_6" name="bldg" onclick='getCheckboxValue()' value="성복동">
+						<label for="checkbox_6">성복동</label></li>
+				</ul>
+				<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="resetBtn">
+			</div>
+			<div class="category">
+				<select name="hospital" class="selectBox">
+					<option value="안과" class="optionBox">안과</option>
+					<option value="치과" class="optionBox">치과</option>
+					<option value="피부과" class="optionBox">피부과</option>
+					<option value="산부인과" class="optionBox">산부인과</option>
+					<option value="유방외과" class="optionBox">유방외과</option>
+					<option value="성형외과" class="optionBox">성형외과</option>
+					<option value="대장항문외과" class="optionBox">대장항문외과</option>
+					<option value="정형외과" class="optionBox">정형외과</option>
+					<option value="일반외과" class="optionBox">일반외과</option>
+					<option value="내과" class="optionBox">내과</option>
+					<option value="신경외과" class="optionBox">신경외과</option>
+					<option value="흉부외과" class="optionBox">흉부외과</option>
+					<option value="소아과" class="optionBox">소아과</option>
+					<option value="암센터" class="optionBox">암센터</option>
+					<option value="요양병원" class="optionBox">요양병원</option>
+					<option value="정신건강의학과" class="optionBox">정신건강의학과</option>
+				</select>
+			</div>
+			<button type="submit" class="submitBtn">
+	   				<span>검색</span>
+	 		</button>
+		</form>
+	</div>
 </body>
 </html>

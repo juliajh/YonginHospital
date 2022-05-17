@@ -1,22 +1,12 @@
-html,body{
-	padding:0;
-	margin:0;
-	width:100%;
-	height:100%;
-	font-family: 'Nanum Myeongjo', serif;
-}
-
 .content3{
-	height: 100%;
-	position:relative;
-	justify-content: center;
+	text-align:center;
+	justify-content:center;
+	height:100%;
 	display: flex;
 	align-items: center;
-	text-align: center;
 }
 
 .selectBox{
-	margin: 10px;
 	width:260px;
 	height:60px;
 	font-size: 1.5rem;
@@ -41,8 +31,8 @@ html,body{
 
 
 .bldg-box{
-	margin-top:70px;
-	margin-bottom:70px;
+	margin-top:50px;
+	margin-bottom:50px;
 	width:1000px;
 	height:300px;
 	background-color:#CAD2C5;
@@ -68,6 +58,7 @@ html,body{
 .btn:hover {
 	cursor: pointer;
 }
+
 
 ul.ks-cboxtags {
     list-style: none;
@@ -114,7 +105,6 @@ ul.ks-cboxtags li input[type="checkbox"] {
 
 .submitBtn {
 	all: unset;
-	margin-top: 1em;
 	background: #2F3E46;
 	width:150px;
 	height:60px;
@@ -125,5 +115,5 @@ ul.ks-cboxtags li input[type="checkbox"] {
 	transition: all 300ms ease;
 	color:white;
 	font-size:20px;
-	margin-top:80px;
+	margin-top:50px;
 }
