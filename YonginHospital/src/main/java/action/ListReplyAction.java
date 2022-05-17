@@ -13,7 +13,6 @@ import jdbc.ConnectionProvider;
 public class ListReplyAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		String mode = request.getParameter("mode");
 		String hospital_code = request.getParameter("hospital_code");
 
 		Connection conn = null;
@@ -24,9 +23,7 @@ public class ListReplyAction implements Action {
 		ReplyDAO dao = new ReplyDAOImpl(conn);    
         
 		request.setAttribute("replyList", dao.selectlist(hospital_code));		
-        request.setAttribute("mode", mode);
 
-        System.out.println("ListStudentAction mode=" + mode);
         System.out.println("pList.size()=" + dao.selectlist(hospital_code).size());
 	}
 }
