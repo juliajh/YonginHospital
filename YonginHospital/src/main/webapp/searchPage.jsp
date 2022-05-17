@@ -24,7 +24,7 @@
 		</div>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPUawaCdEV4yywr10s5MCKcCHwiBOfbUo&sensor=false&language=kr"></script> 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPUawaCdEV4yywr10s5MCKcCHwiBOfbUo&libraries=places&sensor=false&language=kr"></script> 
 <script> 
 	function initialize() { 
 		var myLatlng = new google.maps.LatLng(37.544440974363575, 127.20878534137019 ); // ÁÂÇ¥°ª
