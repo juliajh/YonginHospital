@@ -25,14 +25,29 @@ public class PlaceManager {
 		this.data.put("√≥¿Œ±∏", place);
 	}
 	
-	//get array by name(gu)
-	public Place[] get(String name) {
-		return this.data.get(name);
+	//get gu place by name(gu)
+	public Place get(String name) {
+		return this.data.get(name)[0];
 	}
+	
 
 	//getData return Map
 	public Map<String, Place[]> getData() {
 		return data;
+	}
+	
+	//get array of dong
+	public Place[] getBldg(String gu, String[] bldg) {
+		List<Place> list = new ArrayList<Place>();
+		for(Place place : this.data.get(gu)) {
+			for(String str : bldg) {
+				if(str.contentEquals(place.getName())) {
+					list.add(place);
+				}
+			}
+		}
+		Place[] p = list.toArray(new Place[list.size()]);
+		return p;
 	}
 
 }
