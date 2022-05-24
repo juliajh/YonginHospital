@@ -1,73 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Jamesy Leather</title>
-
-<!-- Bootstrap core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="css/modern-business.css" rel="stylesheet">
-
-<!-- Bootstrap core JavaScript -->
-<script src="jquery/jquery.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-
-<!-- Join -->
-<script type="text/javascript" src="js/cart.js"></script>
-<script type="text/javascript" src="js/member.js"></script></head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title></title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+.login-form {
+    width: 340px;
+    margin: 50px auto;
+  	font-size: 15px;
+}
+.login-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.login-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.btn {        
+    font-size: 15px;
+    font-weight: bold;
+}
+</style>
+</head>
 <body>
-<div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">Log In</h5>
-            <form class="form-signin" method="post" action="login">
-              <div class="form-label-group">
-                <input type="text" id="id" name="id" class="form-control" placeholder="id" required autofocus>
-              </div><br>
-
-              <div class="form-label-group">
-                <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Password" required>
-              </div>
-              
-              <hr>
-              
-              <div class="form-label-group">
-              <c:if test="${check == 1 }">
-                <label>${message }</label>
-              </c:if>
-              </div>
-
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-              <hr class="my-4">
-              Forgot your <a href="javascript:void(0)" onclick="findid()">ID</a> or 
-              				<a href="javascript:void(0)" onclick="findpassword()">Password</a>?
-              <button class="btn btn-lg btn-secondary btn-block text-uppercase" onclick="location='join_form'">Join</button>
-            </form>
-          </div>
+	<c:if test="${sessionID != null }">
+		<script>
+			alert("이미 로그인 중입니다.");
+			location.href = "index.jsp";
+		</script>
+	</c:if>
+<div class="login-form">
+    <form action="LoginMemberAction.do" method="post">
+        <h2 class="text-center">Login</h2>       
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username" name = "id" required="required">
         </div>
-      </div>
-    </div>
-  </div>
-  
-  <script type="text/javascript">
-  function findid(){
-		var url="find_id_form";
-		
-		window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
-	}
-  
-  function findpassword(){	
-	  var url="find_password_form";
-	  
-	  window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
-  }
-  </script>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" name = "pw" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+	        </div>
+    </form>
+    <p class="text-center"><a href="join.jsp">Create an Account</a></p>
+</div>
+<c:if test="${ loginResult == -1 || loginResult == 0 }">
+		<script>
+			alert("아이디 혹은 비밀번호가 틀렸습니다.");
+		</script>
+	</c:if>
+</body>
+</html>

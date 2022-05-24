@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,7 +15,7 @@ import dao.MemberDAOImpl;
 import jdbc.ConnectionProvider;
 
 public class LoginMemberAction implements Action {
-	   public void execute(HttpServletRequest request, HttpServletResponse response) {
+	   public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
 			HttpSession session = request.getSession();
@@ -23,25 +25,19 @@ public class LoginMemberAction implements Action {
 			} catch (SQLException ex) {
 			}
 			MemberDAO dao = new MemberDAOImpl(conn);
-			if(dao.login(id, pw)==1) {
-				session.setAttribute("userid", id);
-				try {
-					response.sendRedirect("main.jsp");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			int loginResult = dao.login(id, pw);
+			if(loginResult==1) {
+				request.setAttribute("loginResult", loginResult);
+				session = request.getSession();
+				session.setAttribute("sessionID", id);
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+				rd.forward(request, response);
 			}
 			else {
-				try {
-					response.sendRedirect("login.jsp");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				request.setAttribute("loginResult", loginResult);
+				RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+				rd.forward(request, response);
 			}
-			
-
-	        System.out.println("LoginMemberAction");	
+	        System.out.println("LoginMemberAction");
 	    }
 }
