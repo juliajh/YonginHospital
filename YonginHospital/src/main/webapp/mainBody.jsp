@@ -59,6 +59,7 @@
 		<div class="content" style="background-color:#84a98c;">
 			<jsp:include page="hospitalForm.jsp"/>
 		</div>
+		<span>test</span>
 	</div>
 </body>
 </html>
