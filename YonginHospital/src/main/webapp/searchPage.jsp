@@ -49,14 +49,10 @@
 <p>병원 이름, 이미지란</p>
 </div>
 
-<div id = "hospital_information">
-<p>병원 정보란</p>
-</div>
 
 
 
 <div id = "hospital_information">
-<p>병원 리뷰란</p>
 <c:if test="${requestScope.commentList != null }">
 	<c:forEach var = "comment" items = "${requestScope.commentList }">
 		<!--  아이디 작성날짜 -->
@@ -79,10 +75,11 @@
 	</c:forEach>
 </c:if>
 	<c:if test="${sessionScope.sessionID != null }">
+	<tr bgcolor = "#F5F5FF5">
+	<form id = "writeommentForm">
+		<input type="hidden" name = "comment_board" value = "${board.board_num }">
+	</form>
 	</c:if>
-
-
-
 </div>
 
 
