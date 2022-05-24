@@ -1,21 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<title>Jamesy Leather</title>
 
-<title>Insert title here</title>
-<link href="css/login.css" rel="stylesheet" type="text/css">
-</head>
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/modern-business.css" rel="stylesheet">
+
+<!-- Bootstrap core JavaScript -->
+<script src="jquery/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+
+<!-- Join -->
+<script type="text/javascript" src="js/cart.js"></script>
+<script type="text/javascript" src="js/member.js"></script></head>
 <body>
-	<form action="login_ok.jsp" method="post">
-		아이디:<input type="text" name="id"><br/>
-		비밀번호:<input type="password" name="pw"><br/>
-		<input type="submit" value="로그인"><br/>
-	</form>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
-</html>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Log In</h5>
+            <form class="form-signin" method="post" action="login">
+              <div class="form-label-group">
+                <input type="text" id="id" name="id" class="form-control" placeholder="id" required autofocus>
+              </div><br>
+
+              <div class="form-label-group">
+                <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Password" required>
+              </div>
+              
+              <hr>
+              
+              <div class="form-label-group">
+              <c:if test="${check == 1 }">
+                <label>${message }</label>
+              </c:if>
+              </div>
+
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              <hr class="my-4">
+              Forgot your <a href="javascript:void(0)" onclick="findid()">ID</a> or 
+              				<a href="javascript:void(0)" onclick="findpassword()">Password</a>?
+              <button class="btn btn-lg btn-secondary btn-block text-uppercase" onclick="location='join_form'">Join</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+  function findid(){
+		var url="find_id_form";
+		
+		window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
+	}
+  
+  function findpassword(){	
+	  var url="find_password_form";
+	  
+	  window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
+  }
+  </script>

@@ -10,7 +10,7 @@
 
 	<h2>회원가입</h2>
 	
-	<form action="join_ok.jsp" method="post" id="join" name ="fr">
+	<form action="AddMemberAction.do" method="post" id="join" name ="fr">
 		아이디:<input type="text" name="id">
 		<input type="button" value="중복확인" class="dup" onclick="winopen()"><br>
 		비밀번호:<input type="password" name="pw"><br/>
