@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -10,8 +11,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!------ Include the above in your HEAD tag ---------->
-
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
 
@@ -22,20 +21,20 @@
 <div class="col-md-6">
 <div class="card">
 <header class="card-header">
-	<a href="login.jsp" class="float-right btn btn-outline-primary mt-1">Log in</a>
+	<a href="index.jsp" class="float-right btn btn-outline-primary mt-1">Home</a>
 	<h4 class="card-title mt-2">Sign up</h4>
 </header>
 <article class="card-body">
-<form>
+<form action="AddMemberAction.do" method="post">
 	<div class="form-row">
 		<div class="col form-group">
 			<label>¿Ã∏ß </label>   
-		  	<input type="text" class="form-control" placeholder="">
+		  	<input type="text" name="name" class="form-control" placeholder="">
 		</div> <!-- form-group end.// -->
 	</div> <!-- form-row end.// -->
 	<div class="form-group">
 		<label>ID</label>
-		<input type="text" class="form-control" placeholder="">
+		<input type="text" name="id" class="form-control" placeholder="">
 	</div> <!-- form-group end.// -->
 	<div class="form-group">
 			<label class="form-check form-check-inline">
@@ -64,15 +63,18 @@
 	
 	<div class="form-group">
 		<label>Create password</label>
-	    <input class="form-control" type="password">
+	    <input class="form-control" type="password" name = "pw">
 	</div> <!-- form-group end.// -->  
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block"> Register  </button>
     </div> <!-- form-group// -->      
     <small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our <br> Terms of use and Privacy Policy.</small>                                          
 </form>
+
+
+
 </article> <!-- card-body end .// -->
-<div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>
+<div class="border-top card-body text-center">Have an account? <a href="login.jsp">Log In</a></div>
 </div> <!-- card.// -->
 </div> <!-- col.//-->
 
