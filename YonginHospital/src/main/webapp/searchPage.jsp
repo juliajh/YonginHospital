@@ -53,5 +53,39 @@
 <p>병원 정보란</p>
 </div>
 
+
+
+<div id = "hospital_information">
+<p>병원 리뷰란</p>
+<c:if test="${requestScope.commentList != null }">
+	<c:forEach var = "comment" items = "${requestScope.commentList }">
+		<!--  아이디 작성날짜 -->
+		<td width = "150">
+			<div>
+				${comment.comment_id }<br>
+				<font size="2" color = "lightgray">${comment.comment_date }</font>
+			</div>
+		</td>
+		<td width = "550">
+			<div class = "text_wrapper">
+				${comment.comment_content }
+			</div>
+		</td>
+		<td width = "100">
+			<div id = "btn" style ="text-align:center;">
+				<a href="#"> 답변 </a><br>
+			</div>
+		</td>
+	</c:forEach>
+</c:if>
+	<c:if test="${sessionScope.sessionID != null }">
+	</c:if>
+
+
+
+</div>
+
+
+
 </body>
 </html>
