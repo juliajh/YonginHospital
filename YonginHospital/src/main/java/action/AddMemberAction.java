@@ -30,7 +30,7 @@ public class AddMemberAction implements Action {
 			}
 			MemberDAO dao = new MemberDAOImpl(conn);
 			dao.insert(student);
-	        System.out.println("Sucess Add Student");
+	        System.out.println("Sucess Add Member");
 	        try {
 				response.sendRedirect("login.jsp");
 			} catch (IOException e) {

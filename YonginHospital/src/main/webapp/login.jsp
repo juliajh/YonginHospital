@@ -14,8 +14,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
 .login-form {
-    width: 340px;
-    margin: 50px auto;
+    width: 600px;
+    margin: 130px auto;
   	font-size: 15px;
 }
 .login-form form {
@@ -28,7 +28,7 @@
     margin: 0 0 15px;
 }
 .form-control, .btn {
-    min-height: 38px;
+    min-height: 60px;
     border-radius: 2px;
 }
 .btn {        
@@ -38,6 +38,10 @@
 </style>
 </head>
 <body>
+
+
+
+
 	<c:if test="${sessionID != null }">
 		<script>
 			alert("이미 로그인 중입니다.");
