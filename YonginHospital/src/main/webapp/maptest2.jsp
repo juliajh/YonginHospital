@@ -45,6 +45,12 @@
 </style>
 </head>
 <body>
+<%
+	String gu=request.getParameter("gu");
+	String[] bldg=request.getParameterValues("bldg");
+	String hospital = request.getParameter("hospital");
+%>
+
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
@@ -52,7 +58,7 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="죽전동 병원" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="<%=gu+bldg[0]+hospital %>" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
