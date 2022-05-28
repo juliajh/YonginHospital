@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import = "java.util.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,19 +54,12 @@
 	String[] bldg=request.getParameterValues("bldg");
 	String hospital = request.getParameter("hospital");
 %>
+<c:set var="keyword" value="<%=gu+bldg[0]+hospital %>" />
 
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
-        <div class="option">
-            <div>
-                <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="<%=gu+bldg[0]+hospital %>" id="keyword" size="15"> 
-                    <button type="submit">검색하기</button> 
-                </form>
-            </div>
-        </div>
         <hr>
         <ul id="placesList"></ul>
         <div id="pagination"></div>
@@ -96,7 +92,7 @@ searchPlaces();
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
-    var keyword = document.getElementById('keyword').value;
+    var keyword = "${keyword}";
 
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
         alert('키워드를 입력해주세요!');
