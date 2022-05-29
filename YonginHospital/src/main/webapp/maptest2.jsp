@@ -9,7 +9,6 @@
 <meta charset="utf-8">
 <title>키워드로 장소검색하고 목록으로 표출하기</title>
 <link href="css/map.css" rel="stylesheet" type="text/css">
-
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
@@ -22,15 +21,12 @@
 
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-</div>v>  <div id="menu_wrap" class="bg_white">
-        <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-</div> </p>
-	    </div>
-	</div>
 </div>
-
+<div id="menu_wrap">
+	<hr>
+	<ul id="placesList"></ul>
+</div>
+<div id="pagination" style="width: 100%; text-align:center;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3093e75566cb9fc76d03f3f1d882d096&libraries=services"></script>
 <script>
@@ -161,20 +157,19 @@ function displayPlaces(places) {
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
 
-    var el = document.createElement('li'),
-    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
-                '<div class="info">' +
-                '   <h5>' + places.place_name + '</h5>';
+    var el = document.createElement('li');
+    
+    itemStr = ' <div class="card-body">  <h5 class="card-title">'+places.place_name+'</h5>';
 
     if (places.road_address_name) {
-        itemStr += '    <span>' + places.road_address_name + '</span>' +
-                    '   <span class="jibun gray">' +  places.address_name  + '</span>';
+        itemStr += '    <p class="card-text"> 도로명주소: ' + places.road_address_name + '<br> 주소: '
+        + places.address_name  + '<br>';
     } else {
-        itemStr += '    <span>' +  places.address_name  + '</span>'; 
+        itemStr += '    <p class="card-text">' +  places.address_name  + '<br>'; 
     }
                  
-      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-                '</div>';           
+      itemStr += '  phone: ' + places.phone  + '<br>' +
+                '</p>  <a href="#" class="btn btn-primary">MORE</a>  ';           
 
     el.innerHTML = itemStr;
     el.className = 'item';
