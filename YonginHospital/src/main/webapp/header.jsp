@@ -45,6 +45,7 @@
 		
 		<a href="join.jsp">회원가입</a>
 		<a href="index.jsp">병원검색</a>
+		<a href="webcrawling.jsp">웹크롤링테스트</a>
 		<a onClick="moveToTopSmooth()">동네병원검색</a><br>
 	</header>
 </body>
