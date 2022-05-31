@@ -39,9 +39,6 @@
 </head>
 <body>
 
-
-
-
 	<c:if test="${sessionID != null }">
 		<script>
 			alert("이미 로그인 중입니다.");
