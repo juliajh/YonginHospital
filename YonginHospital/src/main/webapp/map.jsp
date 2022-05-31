@@ -1,53 +1,200 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="dto.*"%>
-<%@ page import="dao.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import = "java.util.*" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Map</title>
+<meta charset="utf-8">
+<title>키워드로 장소검색하고 목록으로 표출하기</title>
 <link href="css/map.css" rel="stylesheet" type="text/css">
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
 <%
-	request.setCharacterEncoding("EUC-KR");
 	String gu=request.getParameter("gu");
-	String[] bldg=request.getParameterValues("bldg");
+	List<String> bldgList=new ArrayList(Arrays.asList(request.getParameterValues("bldg[]")));
 	String hospital = request.getParameter("hospital");
-	Place guPlace = PlaceManager.getInstance().get(gu);
-	Place[] place = PlaceManager.getInstance().getBldg(gu, bldg);
-%>
-<c:set var="locations" value="<%=place%>"/> <!-- bldg의 위치들의 배열 -->
-<c:set var="position" value="<%=guPlace%>"/> <!-- gu 위치 -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPUawaCdEV4yywr10s5MCKcCHwiBOfbUo&libraries=places&sensor=false&language=kr"></script> 
-<script> 
-	function initialize() { 
-		var lat = "${position.lat}";
-		var lng = "${position.lng}";
-		var myLatlng = new google.maps.LatLng(lat, lng); // 좌표값
-  		var mapOptions = { 
-        	zoom: 13, // 지도 확대레벨 조정
-        	center: myLatlng, 
-        	mapTypeId: google.maps.MapTypeId.ROADMAP,
-  		} 
 
-  		var map = new google.maps.Map(document.getElementById('map'), mapOptions); 
+%>
+<c:set var="bldgList" value="<%=bldgList%>"/> 
+<c:set var="hospital" value="<%=hospital%>"/> 
+
+<div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+</div>
+<div id="menu_wrap">
+	<hr>
+	<ul id="placesList"></ul>
+</div>
+<div id="pagination" style="width: 100%; text-align:center;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2302400bab2456e5c3a2d414983aa9fc&libraries=services"></script>
+<script>
+
+// places를 담을 배열입니다
+var placesArr = [];
+var markers=[];
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 장소 검색 객체를 생성합니다
+var ps = new kakao.maps.services.Places();  
+
+// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+searchPlaces();
+// 키워드 검색을 요청하는 함수입니다
+
+function searchPlaces() {
+
+    <c:forEach items="${bldgList}" var="bldg" varStatus="status">
+    	ps.keywordSearch("${bldg}"+' '+"${hospital}", placesSearchCB);
+	</c:forEach>
+
+}
+
+// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+function placesSearchCB(data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+	   	for ( var i=0; i<data.length; i++ ) {
+		   	if (placesArr.includes(data[i])==false){ 
+		   		placesArr.push(data[i]);
+		   	}
+		}
+	   	displayPlaces(placesArr);
+    }
+}
+
+// 검색 결과 목록과 마커를 표출하는 함수입니다
+function displayPlaces(places)
+{
+	
+    var listEl = document.getElementById('placesList'), 
+    menuEl = document.getElementById('menu_wrap'),
+    fragment = document.createDocumentFragment(), 
+    bounds = new kakao.maps.LatLngBounds(), 
+    listStr = '';
+    // 검색 결과 목록에 추가된 항목들을 제거합니다
+    removeAllChildNods(listEl);
+    // 지도에 표시되고 있는 마커를 제거합니다
+    removeMarker();
 		
-		<c:forEach items="${locations}" var="item">
-			var marker = new google.maps.Marker({ 
-				position: new google.maps.LatLng("${item.getLat()}","${item.getLng()}"), 
-				map: map,
-				label: "${item.getName()}",
-			}); 
-		</c:forEach>
-  } 
-	window.onload = initialize;
+    for ( var i=0; i<places.length; i++ ) {
+    	
+    	//placesArr에 places 담기 
+        // 마커를 생성하고 지도에 표시합니다
+        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
+            marker = addMarker(placePosition, i), 
+            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        bounds.extend(placePosition);
+        // 마커와 검색결과 항목에 mouseover 했을때
+        // 해당 장소에 인포윈도우에 장소명을 표시합니다
+        // mouseout 했을 때는 인포윈도우를 닫습니다
+        (function(marker, title) {
+            kakao.maps.event.addListener(marker, 'mouseover', function() {
+                displayInfowindow(marker, title);
+            });
+            kakao.maps.event.addListener(marker, 'mouseout', function() {
+                infowindow.close();
+            });
+            itemEl.onmouseover =  function () {
+                displayInfowindow(marker, title);
+            };
+            itemEl.onmouseout =  function () {
+                infowindow.close();
+            };
+        })(marker, places[i].place_name);
+        fragment.appendChild(itemEl);
+    }
+    // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
+    listEl.appendChild(fragment);
+    menuEl.scrollTop = 0;
+    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+    map.setBounds(bounds);
+    
+    console.log(places);
+}
+
+
+// 검색결과 항목을 Element로 반환하는 함수입니다
+function getListItem(index, places) {
+
+    var el = document.createElement('li');
+    
+    itemStr = ' <div class="card-body">  <h5 class="card-title">'+places.place_name+'</h5>';
+
+    if (places.road_address_name) {
+        itemStr += '    <p class="card-text"> 도로명주소: ' + places.road_address_name + '<br> 주소: '
+        + places.address_name  + '<br>';
+    } else {
+        itemStr += '    <p class="card-text">' +  places.address_name  + '<br>'; 
+    }
+                 
+      itemStr += '  phone: ' + places.phone  + '<br>' +
+                '</p>  <a href="#" class="btn btn-primary">MORE</a>  ';           
+
+    el.innerHTML = itemStr;
+    el.className = 'item';
+
+    return el;
+}
+
+// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+function addMarker(position, idx, title) {
+    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+        imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+        imgOptions =  {
+            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+            spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+            offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+        },
+        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+            marker = new kakao.maps.Marker({
+            position: position, // 마커의 위치
+            image: markerImage 
+        });
+
+    marker.setMap(map); // 지도 위에 마커를 표출합니다
+    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+
+    return marker;
+}
+
+// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+// 인포윈도우에 장소명을 표시합니다
+function displayInfowindow(marker, title) {
+    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+
+    infowindow.setContent(content);
+    infowindow.open(map, marker);
+}
+
+// 검색결과 목록의 자식 Element를 제거하는 함수입니다
+function removeAllChildNods(el) {   
+    while (el.hasChildNodes()) {
+        el.removeChild (el.lastChild);
+    }
+}
+
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
+
 </script>
-	 <div class="mapBody">
-		<div id="map" class="mapContent"></div>
-	</div>
 </body>
 </html>

@@ -13,7 +13,7 @@
 <%
 	request.setCharacterEncoding("EUC-KR");
 	String gu=request.getParameter("gu");
-	String[] bldg=request.getParameterValues("bldg");
+	String[] bldg=request.getParameterValues("bldg[]");
 	String hospital = request.getParameter("hospital");
 %>
 </body>

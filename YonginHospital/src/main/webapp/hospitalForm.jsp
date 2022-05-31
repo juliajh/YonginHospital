@@ -17,7 +17,7 @@
 	var value;
 	
 	function resultReset(){
-		  var loc_list = document.getElementsByName("bldg");
+		  var loc_list = document.getElementsByName("bldg[]");
 		  for(var i=0;i<loc_list.length;i++)
 		  {
 			if(loc_list[i].checked == true)
@@ -56,7 +56,7 @@
   			var li=document.createElement("li");
   			const newInput=document.createElement("input");
   			newInput.setAttribute("type","checkbox");
-  			newInput.setAttribute("name","bldg");
+  			newInput.setAttribute("name","bldg[]");
   			newInput.setAttribute("onclick","getCheckboxValue()");
   			newInput.setAttribute("value",selectedList[i]);
   			newInput.setAttribute("id","checkbox_"+i);
@@ -74,7 +74,7 @@
 	function getCheckboxValue()  {
 		 allResults=[]
 		  // 선택된 목록 가져오기
-		  var loc_list = document.getElementsByName("bldg");
+		  var loc_list = document.getElementsByName("bldg[]");
 		  for(var i=0;i<loc_list.length;i++){
 			if(loc_list[i].checked == true) {
 				allResults.push(loc_list[i].value);
@@ -101,19 +101,19 @@
 			</div>
 			<div class="bldg-box">
 				<ul class="ks-cboxtags" id="bldgs">
-					<li><input type="checkbox" id="checkbox_0" name="bldg" onclick='getCheckboxValue()' value="풍덕천동">
+					<li><input type="checkbox" id="checkbox_0" name="bldg[]" onclick='getCheckboxValue()' value="풍덕천동">
 						<label for="checkbox_0">풍덕천동</label></li>
-					<li><input type="checkbox" id="checkbox_1" name="bldg" onclick='getCheckboxValue()' value="신봉동">
+					<li><input type="checkbox" id="checkbox_1" name="bldg[]" onclick='getCheckboxValue()' value="신봉동">
 						<label for="checkbox_1">신봉동</label></li>
-					<li><input type="checkbox" id="checkbox_2" name="bldg" onclick='getCheckboxValue()' value="죽전동">
+					<li><input type="checkbox" id="checkbox_2" name="bldg[]" onclick='getCheckboxValue()' value="죽전동">
 						<label for="checkbox_2">죽전동</label></li>
-					<li><input type="checkbox" id="checkbox_3" name="bldg" onclick='getCheckboxValue()' value="동천동">
+					<li><input type="checkbox" id="checkbox_3" name="bldg[]" onclick='getCheckboxValue()' value="동천동">
 						<label for="checkbox_3">동천동</label></li>
-					<li><input type="checkbox" id="checkbox_4" name="bldg" onclick='getCheckboxValue()' value="고기동">
+					<li><input type="checkbox" id="checkbox_4" name="bldg[]" onclick='getCheckboxValue()' value="고기동">
 						<label for="checkbox_4">고기동</label></li>
-					<li><input type="checkbox" id="checkbox_5" name="bldg" onclick='getCheckboxValue()' value="상현동">
+					<li><input type="checkbox" id="checkbox_5" name="bldg[]" onclick='getCheckboxValue()' value="상현동">
 						<label for="checkbox_5">상현동</label></li>
-					<li><input type="checkbox" id="checkbox_6" name="bldg" onclick='getCheckboxValue()' value="성복동">
+					<li><input type="checkbox" id="checkbox_6" name="bldg[]" onclick='getCheckboxValue()' value="성복동">
 						<label for="checkbox_6">성복동</label></li>
 				</ul>
 				<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="resetBtn">
