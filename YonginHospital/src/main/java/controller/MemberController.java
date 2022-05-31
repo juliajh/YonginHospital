@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.AddMemberAction;
+import action.AddReplyAction;
 import action.DeleteMemberAction;
 import action.EditMemberAction;
-import action.ListMemberAction;
+import action.ListReplyAction;
 import action.LoginMemberAction;
 import action.SelectMemberAction;
 
@@ -32,10 +33,10 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		Action action = null;
-		if (command.equals("/ListViewMemberAction.do")) { // list view
-			action = new ListMemberAction(); // return personList w/ mode
+		if (command.equals("/ListReplyMemberAction.do")) { // list view
+			action = new ListReplyAction(); // return personList w/ mode
 			action.execute(request, response);
-			RequestDispatcher rd = request.getRequestDispatcher("listView.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("searchPage.jsp");
 			rd.forward(request, response);
 		} else if (command.equals("/DetailViewMemberAction.do")) { // detail view
 			action = new SelectMemberAction(); // return person
@@ -67,6 +68,11 @@ public class MemberController extends HttpServlet {
 			action = new DeleteMemberAction(); // delete person
 			action.execute(request, response);
 			RequestDispatcher rd = request.getRequestDispatcher("/ListViewMemberAction.do?mode=delete");
+			rd.forward(request, response);
+		} else if (command.equals("/AddReplyAction.do")) { // delete
+			action = new AddReplyAction(); // delete person
+			action.execute(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("searchPage.jsp");
 			rd.forward(request, response);
 		} 
 	}

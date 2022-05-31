@@ -53,6 +53,23 @@
 
 
 <div id = "hospital_information">
+	
+	<c:forEach var="person" items="${ReplyList}">
+			<tr>
+				<td>${person.getReply_content()}</td>
+			</tr>
+			</c:forEach>
+	
+	
+	
+	
+<c:if test="${sessionScope.sessionID != null }">
+	<tr bgcolor = "#F5F5FF5">
+	<form id = "writeommentForm">
+		<input type="hidden" name = "comment_board" value = "${board.board_num }">
+		<input type="hidden" name = "comment_id" value = "${sessionScope.sessionID }">
+	</form>
+	</c:if>
 <c:if test="${requestScope.commentList != null }">
 	<c:forEach var = "comment" items = "${requestScope.commentList }">
 		<!--  아이디 작성날짜 -->
@@ -73,13 +90,8 @@
 			</div>
 		</td>
 	</c:forEach>
-</c:if>
-	<c:if test="${sessionScope.sessionID != null }">
-	<tr bgcolor = "#F5F5FF5">
-	<form id = "writeommentForm">
-		<input type="hidden" name = "comment_board" value = "${board.board_num }">
-	</form>
 	</c:if>
+	
 </div>
 
 
