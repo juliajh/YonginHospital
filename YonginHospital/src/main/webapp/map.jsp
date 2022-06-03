@@ -32,7 +32,7 @@
 </div>
 <div id="pagination" style="width: 100%; text-align:center;"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3093e75566cb9fc76d03f3f1d882d096&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2302400bab2456e5c3a2d414983aa9fc&libraries=services"></script>
 <script>
 
 // places를 담을 배열입니다
@@ -149,7 +149,7 @@ function getListItem(index, places) {
 
     var el = document.createElement('li');
     
-    itemStr = ' <div class="card-body"><a href="searchPage.jsp?hospitalId='+places.id+'"><h5 class="card-title">'+places.place_name+'</h5></a>';
+    itemStr = ' <div class="card-body"><a href="searchPage.jsp?hospital_name='+places.place_name+'"><h5 class="card-title">'+places.place_name+'</h5></a>';
 
     if (places.road_address_name) {
         itemStr += '    <p class="card-text"> 도로명주소: ' + places.road_address_name + '<br> 주소: '
