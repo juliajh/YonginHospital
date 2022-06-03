@@ -12,6 +12,8 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
+
 <%
 	String gu=request.getParameter("gu");
 	List<String> bldgList=new ArrayList(Arrays.asList(request.getParameterValues("bldg[]")));

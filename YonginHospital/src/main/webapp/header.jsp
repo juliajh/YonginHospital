@@ -22,18 +22,21 @@
 <script type="text/javascript" src="js/member.js"></script>
 <link href="css/header.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-	function scrollDown(){
-		  window.scrollTo(0,document.body.scrollHeight);
-	}
-	
-	var moveToTopSmooth=function scrollUp(){
-		document.body.scrollIntoView({ behavior: 'smooth' });
-	}
+    function homeClick() {
+    	document.getElementById("main").scrollIntoView({ behavior: "smooth" });
+    }
+    function hospitalSearch() {
+        document.getElementById("hospitalSearch").scrollIntoView({ behavior: "smooth" });
+    }
+    function positionSearch() {
+    	document.getElementById("positionSearch").scrollIntoView({ behavior: "smooth" });
+    }
+    
 </script>
 </head>
 <body>
 	<header>
-		<a href="index.jsp">모두의 병원</a>
+		<a onClick="homeClick()">모두의 병원</a>
 		
 		<c:if test="${sessionID != null }">
 			<a href="logout.jsp">로그아웃</a>
@@ -44,9 +47,9 @@
 		
 		
 		<a href="join.jsp">회원가입</a>
-		<a href="index.jsp">병원검색</a>
+		<a onClick="hospitalSearch()">병원검색</a>
 		<a href="webcrawling.jsp">웹크롤링테스트</a>
-		<a onClick="moveToTopSmooth()">동네병원검색</a><br>
+		<a onClick="positionSearch()">동네병원검색</a><br>
 	</header>
 </body>
 </html>
