@@ -9,6 +9,10 @@
 <link href="css/searchPage.css" rel="stylesheet" type="text/css">
 </head>
 <body>	
+<%
+	String id=request.getParameter("hospitalId");
+
+%>
 <jsp:include page="header.jsp"/>
 
 <div class="container">
@@ -17,7 +21,7 @@
 				<tr>
 					<td class = "search_text">검색 결과</td>
 					<hr>
-					<%-- <td> <%= request.getParameter("") </td>  --%> 
+					<td> </td>
 				</tr>
 			</table>
 		</div>
