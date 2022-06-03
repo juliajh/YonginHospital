@@ -40,7 +40,7 @@ var markers=[];
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 4 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
@@ -66,11 +66,25 @@ function searchPlaces() {
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-	   	for ( var i=0; i<data.length; i++ ) {
-		   	if (placesArr.includes(data[i])==false){ 
-		   		placesArr.push(data[i]);
-		   	}
+    	for ( var i=0; i<data.length; i++ ) {
+        	var mybool=false;
+	   		if(placesArr.length>=1){
+		   		for(var j=0;j<placesArr.length;j++){
+		   			if(data[i].id==placesArr[j].id){
+		   				mybool=true;
+		   				break;
+		   			}
+		   		}
+		   		if (!mybool){
+		   			placesArr.push(data[i]);
+		   		}
+	   		}
+	   		else{
+	   			placesArr.push(data[i]);
+	   		}
+	   		
 		}
+		
 	   	displayPlaces(placesArr);
     }
 }
