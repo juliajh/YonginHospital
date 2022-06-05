@@ -8,7 +8,7 @@
 <title>hospitalForm</title>
 <link href="css/hospitalForm.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body >
 <!-- <head></head> 사이에 넣으면 웹브라우저가 HTML 문서를 해석(Parsing) 할 때 
 <script> 태그를 만나면 그 안에 있는 JavaScript 의 처리가 끝날 때 까지 
 다른 HTML의 해석을 멈추기 때문에 HTML 페이지가 화면에 완성되기까지 더 오래 걸린다.-->
@@ -91,32 +91,9 @@
 </script>
 	<div class="content3">
 		<form name="hospitalForm" id="locations" action="searchHospital.jsp" method="post">
-			<div style="padding-top:100px; margin-bottom:30px;"><span style="font-size:2.5rem;">동네 주변 병원을 찾아보고 후기를 볼 수 있어요</span></div>
-			<div class="gu-box" id="select-box">
-				<select name="gu" class="selectBox" onchange="handleOnChange(this)">
-					<option value="수지구" class="optionBox">수지구</option>
-					<option value="기흥구" class="optionBox">기흥구</option>
-					<option value="처인구" class="optionBox">처인구</option>
-				</select>
-			</div>
-			<div class="bldg-box">
-				<ul class="ks-cboxtags" id="bldgs">
-					<li><input type="checkbox" id="checkbox_0" name="bldg[]" onclick='getCheckboxValue()' value="풍덕천동">
-						<label for="checkbox_0">풍덕천동</label></li>
-					<li><input type="checkbox" id="checkbox_1" name="bldg[]" onclick='getCheckboxValue()' value="신봉동">
-						<label for="checkbox_1">신봉동</label></li>
-					<li><input type="checkbox" id="checkbox_2" name="bldg[]" onclick='getCheckboxValue()' value="죽전동">
-						<label for="checkbox_2">죽전동</label></li>
-					<li><input type="checkbox" id="checkbox_3" name="bldg[]" onclick='getCheckboxValue()' value="동천동">
-						<label for="checkbox_3">동천동</label></li>
-					<li><input type="checkbox" id="checkbox_4" name="bldg[]" onclick='getCheckboxValue()' value="고기동">
-						<label for="checkbox_4">고기동</label></li>
-					<li><input type="checkbox" id="checkbox_5" name="bldg[]" onclick='getCheckboxValue()' value="상현동">
-						<label for="checkbox_5">상현동</label></li>
-					<li><input type="checkbox" id="checkbox_6" name="bldg[]" onclick='getCheckboxValue()' value="성복동">
-						<label for="checkbox_6">성복동</label></li>
-				</ul>
-				<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="resetBtn">
+			<div style="margin-bottom:30px;">
+				<span style="font-size:2.2rem;">동네 주변 병원을 찾아보고 후기를 볼 수 있어요</span>
+				<img id="locationImg" src="./media/location.png"/>
 			</div>
 			<div class="category">
 				<select name="hospital" class="selectBox">
@@ -138,6 +115,34 @@
 					<option value="정신건강의학과" class="optionBox">정신건강의학과</option>
 				</select>
 			</div>
+			<div class="gu-box" id="select-box">
+				<select name="gu" class="selectBox" onchange="handleOnChange(this)">
+					<option value="수지구" class="optionBox">수지구</option>
+					<option value="기흥구" class="optionBox">기흥구</option>
+					<option value="처인구" class="optionBox">처인구</option>
+				</select>
+			</div>
+
+			<div class="bldg-box">
+				<ul class="ks-cboxtags" id="bldgs">
+					<li><input type="checkbox" id="checkbox_0" name="bldg[]" onclick='getCheckboxValue()' value="풍덕천동">
+						<label for="checkbox_0">풍덕천동</label></li>
+					<li><input type="checkbox" id="checkbox_1" name="bldg[]" onclick='getCheckboxValue()' value="신봉동">
+						<label for="checkbox_1">신봉동</label></li>
+					<li><input type="checkbox" id="checkbox_2" name="bldg[]" onclick='getCheckboxValue()' value="죽전동">
+						<label for="checkbox_2">죽전동</label></li>
+					<li><input type="checkbox" id="checkbox_3" name="bldg[]" onclick='getCheckboxValue()' value="동천동">
+						<label for="checkbox_3">동천동</label></li>
+					<li><input type="checkbox" id="checkbox_4" name="bldg[]" onclick='getCheckboxValue()' value="고기동">
+						<label for="checkbox_4">고기동</label></li>
+					<li><input type="checkbox" id="checkbox_5" name="bldg[]" onclick='getCheckboxValue()' value="상현동">
+						<label for="checkbox_5">상현동</label></li>
+					<li><input type="checkbox" id="checkbox_6" name="bldg[]" onclick='getCheckboxValue()' value="성복동">
+						<label for="checkbox_6">성복동</label></li>
+				</ul>
+				<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="resetBtn">
+			</div>
+
 			<button type="submit" class="submitBtn">
 	   				<span>검색</span>
 	 		</button>

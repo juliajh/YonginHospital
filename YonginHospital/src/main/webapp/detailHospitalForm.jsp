@@ -9,7 +9,8 @@
 </head>
 <body>
 	<div class="subscribe-box">
-		<span style="font-size:2.5rem;">리뷰와 자세한 정보를 보고 싶은 병원 이름을 검색하세요</span>
+		<span style="font-size:2.2rem;">리뷰와 자세한 정보를 보고 싶은 병원 이름을 검색하세요</span>
+   		<img id="medicineImg" src="./media/medicine.png"/>
    		<form class="subscribe">
    			<input type="text" placeholder="검색할 병원을 입력하세요." name="hospitalName" autocomplete="off" required="required" />
    			<button type="submit">

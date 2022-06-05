@@ -8,7 +8,7 @@
 </head>
 <body style="padding:0;	margin:0; width:100%; height:100%;">
 <%
-	response.sendRedirect("mainBody.jsp");
+	response.sendRedirect("main.jsp");
 %>
 </body>
 </html>

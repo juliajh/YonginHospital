@@ -21,35 +21,24 @@
 <script type="text/javascript" src="js/cart.js"></script>
 <script type="text/javascript" src="js/member.js"></script>
 <link href="css/header.css" rel="stylesheet" type="text/css">
-<script type="text/javascript">
-    function homeClick() {
-    	document.getElementById("main").scrollIntoView({ behavior: "smooth" });
-    }
-    function hospitalSearch() {
-        document.getElementById("hospitalSearch").scrollIntoView({ behavior: "smooth" });
-    }
-    function positionSearch() {
-    	document.getElementById("positionSearch").scrollIntoView({ behavior: "smooth" });
-    }
-    
-</script>
 </head>
 <body>
 	<header>
-		<a onClick="homeClick()">모두의 병원</a>
-		
-		<c:if test="${sessionID != null }">
-			<a href="logout.jsp">로그아웃</a>
-		</c:if>
-		<c:if test="${sessionID == null }">
-			<a href="login.jsp">로그인</a>
-		</c:if>
-		
-		
-		<a href="join.jsp">회원가입</a>
-		<a onClick="hospitalSearch()">병원검색</a>
-		<a href="webcrawling.jsp">웹크롤링테스트</a>
-		<a onClick="positionSearch()">동네병원검색</a><br>
+		<h3><a href="main.jsp#main">모두의 병원</a></h3> 
+		<nav>
+			<ul>
+				<li><a href="join.jsp">회원가입</a></li>
+				<li><a href="main.jsp#hospitalSearch">병원검색</a></li>
+				<li><a href="webcrawling.jsp">웹크롤링테스트</a></li>
+				<li><a href="main.jsp#positionSearch">동네병원검색</a></li>
+				<c:if test="${sessionID != null }">
+					<li><a href="logout.jsp" style="margin-right:40px">로그아웃</a></li>
+				</c:if>
+				<c:if test="${sessionID == null }">
+					<li><a href="login.jsp" style="margin-right:40px">로그인</a></li>
+				</c:if>
+			</ul>
+		</nav>
 	</header>
 </body>
 </html>

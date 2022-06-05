@@ -17,7 +17,7 @@
 	String hospital = request.getParameter("hospital");
 %>
 </body>
-<div class="hashtagBox">
+<div class="hashtagBox" style="padding-top:50px;">
 	<span class="hashtagContent">#<%=gu %></span>
 	<%
 		for(int i = 0;i<bldg.length;i++)

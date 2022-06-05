@@ -4,20 +4,20 @@
 	height:100%;
 	display: flex;
 	align-items: center;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .selectBox{
 	width:260px;
 	height:60px;
-	font-size: 1.5rem;
-	font-weight: 620;
+	font-size: 1.4rem;
 	padding-left: 20px;
 	padding-right: 20px;
-	border: 3px solid #354F52;
 	border-radius: 20px;
 	background-color: #CAD2C5;
 	text-align:center;
-	font-family: 'Nanum Myeongjo', serif;
+	margin-bottom:20px;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .selectBox:hover {
@@ -26,13 +26,11 @@
 
 .optionBox{
 	background-color:#CAD2C5;
-	font-family:'Nanum Myeongjo', serif;
 }
 
 
 .bldg-box{
-	margin-top:50px;
-	margin-bottom:50px;
+	margin-bottom:30px;
 	width:1000px;
 	height:300px;
 	background-color:#CAD2C5;
@@ -41,13 +39,13 @@
 	display: flex;
 	align-items: center;
 	text-align: center;
-	border: 3px solid #354F52;
 	border-radius: 20px;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .resetBtn{
-	width: 36px;
-	height: 36px;
+	width: 30px;
+	height: 30px;
 	cursor: pointer;
 	position:absolute;
 	top:80%;
@@ -82,17 +80,16 @@ ul.ks-cboxtags li label{
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     transition: all .2s;
-    margin:10px 5px;
+    margin:8px 4px;
 }
 
 ul.ks-cboxtags li label {
-    padding: 15px 20px;
+    padding: 12px 20px;
     cursor: pointer;
     font-size:1.3rem;
 }
 
 ul.ks-cboxtags li input[type="checkbox"]:checked + label {
-    border: 2px solid #2F3E46;
     background-color: #354F52;
     color: #fff;
 }
@@ -115,5 +112,56 @@ ul.ks-cboxtags li input[type="checkbox"] {
 	transition: all 300ms ease;
 	color:white;
 	font-size:20px;
-	margin-top:50px;
+}
+
+.submitBtn span {
+	display: inline-block;
+	transition: all 300ms ease;
+}
+
+.submitBtn:before, .subscribe-box .subscribe button:after {
+	content: "";
+	display: block;
+	position: absolute;
+	transition: all 300ms ease;
+	opacity: 0;
+}
+
+.submitBtn:before {
+	height: 7px;
+	width: 7px;
+	background: transparent;
+	border-right: 2px solid;
+	border-top: 3px solid;
+	right: 30px;
+	top: 25px;
+	transform: rotate(45deg);
+}
+
+.submitBtn:after {
+	background: white;
+	height: 2px;
+	width: 50px;
+	left: 0;
+	top: 1.49em;
+}
+
+.submitBtn:hover span {
+	transform: translateX(-10px);
+}
+
+.submitBtn:hover:before {
+	opacity: 1;
+}
+
+.submitBtn:hover:after {
+	width: 14px;
+	opacity: 1;
+	transform: translateX(120px);
+}
+
+#locationImg{
+	 width:75px;
+	 height:75px;
+	 position:absolute;
 }

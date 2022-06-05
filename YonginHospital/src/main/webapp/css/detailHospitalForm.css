@@ -2,6 +2,7 @@
 .subscribe-box {
 	padding-top:15%;
 	text-align:center;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .subscribe-box h2 {
@@ -70,14 +71,6 @@
 	transform: rotate(45deg);
 }
 
-.subscribe-box .subscribe button:after {
-	background: white;
-	height: 2px;
-	width: 50px;
-	left: 0;
-	top: 1.49em;
-}
-
 .subscribe-box .subscribe button:hover span {
 	transform: translateX(-10px);
 }
@@ -90,4 +83,12 @@
 	width: 14px;
 	opacity: 1;
 	transform: translateX(120px);
+}
+
+#medicineImg{
+	margin-left:5px;
+	width:60px;
+	height:60px;
+	position:absolute;
+	
 }

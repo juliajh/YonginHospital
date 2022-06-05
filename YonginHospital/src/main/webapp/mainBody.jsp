@@ -6,9 +6,11 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <link href="css/mainBody.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body style="padding:0;	margin:0; width:100%; height:100%;">
+<body style="padding:0;	margin:0; width:100%; height:100%; font-family: 'Noto Sans KR', sans-serif;">
 <!-- <head></head> 사이에 넣으면 웹브라우저가 HTML 문서를 해석(Parsing) 할 때 
 <script> 태그를 만나면 그 안에 있는 JavaScript 의 처리가 끝날 때 까지 
 다른 HTML의 해석을 멈추기 때문에 HTML 페이지가 화면에 완성되기까지 더 오래 걸린다.-->
@@ -43,23 +45,24 @@
 	 
 	});
 </script>
-<jsp:include page="header.jsp"/>
 <div class="main-container">
 	<div class="content" id="main">
 		<div class="siteName">
-			<span><br>모두의<br/>병원</span><br><br>
+			<span class="title">모두의 병원<br></span>
+			<span class="explain">"모두의 병원"에서는 다양한 사용자들과 병원 리뷰를 공유할 수 있습니다.<br>
+			동네에서 별점이 가장 높은 병원을 확인해보세요.
+			</span>
 		</div>
 		<div class="picture">
 			<img src="./media/hospital.png"/>
 		</div>
 	</div>
-	<div class="content" id="hospitalSearch" style="background-color:#cad2c5;">
+	<div class="content" id="hospitalSearch">
 		<jsp:include page="detailHospitalForm.jsp"/>
 	</div>
-	<div class="content" id="positionSearch" style="background-color:#84a98c;">
+	<div class="content" id="positionSearch">
 		<jsp:include page="hospitalForm.jsp"/>
 	</div>
-	<span>test</span>
 </div>
 </body>
 </html>
