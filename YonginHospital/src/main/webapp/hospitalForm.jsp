@@ -4,15 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="EUC-KR">
 <title>hospitalForm</title>
 <link href="css/hospitalForm.css" rel="stylesheet" type="text/css">
-</head>
-<body >
-<!-- <head></head> 사이에 넣으면 웹브라우저가 HTML 문서를 해석(Parsing) 할 때 
-<script> 태그를 만나면 그 안에 있는 JavaScript 의 처리가 끝날 때 까지 
-다른 HTML의 해석을 멈추기 때문에 HTML 페이지가 화면에 완성되기까지 더 오래 걸린다.-->
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="./jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	var value;
 	
@@ -27,8 +23,23 @@
 		  }
 	}
 	
+	function getCheckboxValue()  {
+		  // 선택된 목록 가져오기
+		  allResults=[]
+		  var loc_list = document.getElementsByName("bldg[]");
+		  for(var i=0;i<loc_list.length;i++){
+			if(loc_list[i].checked == true) {
+				allResults.push(loc_list[i].value);
+			}
+			else{
+				if(loc_list[i].value in allResults){
+					allResults.pop(loc_list[i].value);
+				}
+			}
+		  }
+	}
+	
 	function handleOnChange(e) {
-
 		//기존 동 모두 지우기
 		var locations=document.getElementById("bldgs");
 		while (locations.hasChildNodes()) 
@@ -57,7 +68,7 @@
   			const newInput=document.createElement("input");
   			newInput.setAttribute("type","checkbox");
   			newInput.setAttribute("name","bldg[]");
-  			newInput.setAttribute("onclick","getCheckboxValue()");
+  			//newInput.setAttribute("onclick","getCheckboxValue()");
   			newInput.setAttribute("value",selectedList[i]);
   			newInput.setAttribute("id","checkbox_"+i);
   			li.appendChild(newInput);
@@ -69,28 +80,12 @@
 		}
   		
 	}
-	
-	
-	function getCheckboxValue()  {
-		 allResults=[]
-		  // 선택된 목록 가져오기
-		  var loc_list = document.getElementsByName("bldg[]");
-		  for(var i=0;i<loc_list.length;i++){
-			if(loc_list[i].checked == true) {
-				allResults.push(loc_list[i].value);
-			}
-			else{
-				if(loc_list[i].value in allResults){
-					allResults.pop(loc_list[i].value);
-				}
-			}
-		  }
-	}
-
-	
 </script>
+
+</head>
+<body>
 	<div class="content3">
-		<form name="hospitalForm" id="locations" action="searchHospital.jsp" method="post">
+		<form name="hospitalForm" id="locations" method="post">
 			<div style="margin-bottom:30px;">
 				<span style="font-size:2.2rem;">동네 주변 병원을 찾아보고 후기를 볼 수 있어요</span>
 				<img id="locationImg" src="./media/location.png"/>
@@ -142,11 +137,49 @@
 				</ul>
 				<img src="https://cdn-icons-png.flaticon.com/512/560/560450.png" onclick="resultReset()" class="resetBtn">
 			</div>
-
-			<button type="submit" class="submitBtn">
-	   				<span>검색</span>
+			<button type="button" class="submitBtn">
+	   			<span>검색</span>
 	 		</button>
+	 		<div class="modal hidden">
+			  <div class="bg"></div>
+			  <div class="modalBox">
+			    <img src="https://img.icons8.com/color/48/undefined/delete-sign--v1.png"/ class="closeBtn">
+			    <span>동/읍/면을 선택해주세요</span>
+			  </div>
+			</div>
 		</form>
+		<script>
+			  const open = () => {
+				var check=false;
+			  	var loc_list = document.getElementsByName("bldg[]");
+				  for(var i=0;i<loc_list.length;i++){
+					if(loc_list[i].checked == true) {
+						check=true;
+			  		}
+			  	}
+
+		  		if(!check){
+		  			document.querySelector(".modal").classList.remove("hidden");
+		  		}
+		  		
+		  		else{
+		  			var locationForm=document.getElementById("locations");
+		  			locationForm.setAttribute("action","searchHospital.jsp");
+		  			locationForm.submit();
+		  		}
+			  }
+			
+			  const close = () => {
+			    document.querySelector(".modal").classList.add("hidden");
+			    location.href='main.jsp#positionSearch';
+			  }
+			
+			  document.querySelector(".submitBtn").addEventListener("click", open);
+			  document.querySelector(".closeBtn").addEventListener("click", close);
+			  document.querySelector(".bg").addEventListener("click", close);
+			
+		</script>
 	</div>
+
 </body>
 </html>
