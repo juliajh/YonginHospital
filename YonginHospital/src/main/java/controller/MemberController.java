@@ -37,8 +37,6 @@ public class MemberController extends HttpServlet {
 		if (command.equals("/ListReplyMemberAction.do")) { // list view
 			action = new ListReplyAction(); // return personList w/ mode
 			action.execute(request, response);
-			RequestDispatcher rd = request.getRequestDispatcher("searchPage.jsp");
-			rd.forward(request, response);
 		} else if (command.equals("/DetailViewMemberAction.do")) { // detail view
 			action = new SelectMemberAction(); // return person
 			action.execute(request, response);

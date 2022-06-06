@@ -2,6 +2,8 @@ package action;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +14,7 @@ public class ListReplyAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		String code = request.getParameter("hospital_code");
+		String code = request.getParameter("hospital_name");
 
 		Connection conn = null;
 		try {
@@ -21,8 +23,8 @@ public class ListReplyAction implements Action {
 		}
 		ReplyDAOImpl dao = new ReplyDAOImpl(conn);    
         
-		request.setAttribute("ReplyList", dao.selectlist(code));		
-
+		request.setAttribute("replyList", dao.selectlist(code));
+		RequestDispatcher rd = request.getRequestDispatcher("searchPage.jsp?hospital_name="+code);
         System.out.println("pList.size()=" + dao.selectlist(code).size());
 	}
 }

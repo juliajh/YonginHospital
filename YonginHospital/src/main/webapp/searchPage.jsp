@@ -18,6 +18,14 @@
 <body>	
 <%
 String keyword = request.getParameter("hospital_name");
+Connection conn = null;
+try {
+	conn = ConnectionProvider.getConnection();
+} catch (SQLException ex) {
+}
+ReplyDAOImpl dao = new ReplyDAOImpl(conn);    
+request.setAttribute("replyList", dao.selectlist(keyword));
+System.out.println(dao.selectlist(keyword).isEmpty());
 %>
 <jsp:include page="header.jsp"/>
 <div class="container">
@@ -49,7 +57,6 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places(); 
-console.log(keyword);
 // 키워드로 장소를 검색합니다
 ps.keywordSearch(keyword, placesSearchCB); 
 
@@ -60,11 +67,8 @@ function placesSearchCB (data, status, pagination) {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         var bounds = new kakao.maps.LatLngBounds();
-    	console.log(data[0].x);
-
        	displayMarker(data[0]);    
 		bounds.extend(new kakao.maps.LatLng(data[0].y, data[0].x));
-		console.log(data[0])
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
     } 
@@ -102,8 +106,7 @@ function displayMarker(place) {
 <script>
 
 var ps = new kakao.maps.services.Places(); 
-console.log(keyword);
-//키워드로 장소를 검색합니다
+//장소를 검색합니다
 ps.keywordSearch(keyword, placesSearchCB); 
 
 function placesSearchCB (data, status, pagination) {
@@ -112,7 +115,6 @@ function placesSearchCB (data, status, pagination) {
     	var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
     	var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
     	var position = new kakao.maps.LatLng(data[0].y, data[0].x);
-    	console.log(data[0].x);
     	// 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
     	roadviewClient.getNearestPanoId(position, 50, function(panoId) {
     	    roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
@@ -120,24 +122,6 @@ function placesSearchCB (data, status, pagination) {
     } 
 }
 </script>
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2302400bab2456e5c3a2d414983aa9fc"></script>
-<script>
-
-var ps = new kakao.maps.services.Places(); 
-console.log(keyword);
-//키워드로 장소를 검색합니다
-ps.keywordSearch(keyword, placesSearchCB); 
-
-function placesSearchCB (data, status, pagination) {
-    if (status === kakao.maps.services.Status.OK) {
-    	var str = document.getElementById("phone");
-		str.innerHTML = data[0].phone;
-    	});
-    } 
-}
-</script>
-
 
 <div id = "hospital_information">
 	<form action="AddReplyAction.do" method="post" name = "replyForm">
@@ -147,20 +131,38 @@ function placesSearchCB (data, status, pagination) {
 		<input type = "number" name = "grade">
 		<input type = button onclick = "login()" value="제출" style="width:100px;height:200px;font-size:30px;">
 	</form>
-	<%=(String)session.getAttribute("sessionID")%>
-	<%=keyword%>
-	
 </div>
 
-<%=(String)session.getAttribute("sessionID")%>
-<%=keyword%>
+<div id = "hospital_review">
+<p>병원명:</p><span id="place_name"></span>
+<p>카테고리:</p><span id="category_name"></span>
+<p>전화번호:</p><span id="phone"></span>
+<p>주소:</p><span id="address_name"></span>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2302400bab2456e5c3a2d414983aa9fc"></script>
+<script>
 
+var ps = new kakao.maps.services.Places(); 
+//키워드로 장소를 검색합니다
+ps.keywordSearch(keyword, placesSearchCB); 
+
+function placesSearchCB (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+    	 var infoDiv = document.getElementById('place_name');
+    	 infoDiv.innerHTML = data[0].place_name;
+    	 var infoDiv = document.getElementById('category_name');
+    	 infoDiv.innerHTML = data[0].category_name;
+    	 var infoDiv = document.getElementById('phone');
+    	 infoDiv.innerHTML = data[0].phone;
+    	 var infoDiv = document.getElementById('address_name');
+    	 infoDiv.innerHTML = data[0].address_name;
+    	}
+	}
+</script>
+</div>
 
 
 <script>
-   
-
- function login(){
+    function login(){
             var replyForm = document.replyForm;
             var uid = '<%=(String)session.getAttribute("sessionID")%>';
             if(uid=="null"){ 
@@ -176,36 +178,11 @@ function placesSearchCB (data, status, pagination) {
             }
         }
 </script>
-<%!
-	// JDBC driver name and database URL
-	private static final String DB_PROPERTIES = "?serverTimezone=UTC&useSSL=false"; // MySQL Connector J 8.0
-	private static final String DB_SCHEMAS = "sampledb";
-	private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver"; // deprecated "com.mysql.jdbc.Driver";  // try "com.mysql.cj.jdbc.Driver"
-	private static final String DB_URL = "jdbc:mysql://localhost/" + DB_SCHEMAS + DB_PROPERTIES; 
-	private static final String USER = "root";
-	private static final String PASS = "rlarjsdn99";
-%>
-<%
 
-	Connection conn = null;
-		try {
-	Class.forName(JDBC_DRIVER); //STEP 2: Register JDBC driver
-	conn = DriverManager.getConnection(DB_URL, USER, PASS); //STEP 3: Open a connection
-		} catch (SQLException ex) {
-		out.println("Fail to connection.<br>");
-		out.println("SQLException: " + ex.getMessage());
-	}
-
-	ReplyDAOImpl dao = new ReplyDAOImpl(conn);
-	List<Reply> list = dao.selectlist(keyword);
-	if(list != null){
-		for (Reply p: list){
-%>
-	<h1><%= p.getGrade()%></h1>
-	<h1><%= p.getId()%></h1>
-	<h1><%= p.getReply_content() %></h1>
-
-<% 		} 
-	}%>
+<c:forEach var="reply" items="${replyList}" >
+  	<p> <c:out value="${reply.reply_content}" /></p>
+  	<p> <c:out value="${reply.id}" /></p>
+  	<p> <c:out value="${reply.grade}" /></p>
+</c:forEach>
 </body>
 </html>

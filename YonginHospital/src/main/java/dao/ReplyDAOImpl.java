@@ -74,12 +74,13 @@ public class ReplyDAOImpl {
 		return null;
 	}
 
-	public List<Reply> selectlist(String hosptial_code) { //FoodBean Ÿ���� List�� ���Ϲ޴� selectList �޼ҵ�
+	public List<Reply> selectlist(String hospital_code) { //FoodBean Ÿ���� List�� ���Ϲ޴� selectList �޼ҵ�
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "select * from reply where hospital_code=?";
+			String sql = "select * from reply where hospital_code = ?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, hospital_code);
 			rs = pstmt.executeQuery();
 			List<Reply> replyList = new ArrayList<>();
 			while (rs.next()) {
