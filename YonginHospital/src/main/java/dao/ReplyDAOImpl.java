@@ -15,16 +15,15 @@ public class ReplyDAOImpl {
 		this.conn = conn;
 	}
 	
-	public int insert(Reply bean) { //sql¿¡ °ªÀ» Ãß°¡ÇÏ´Â insert ¸Þ¼Òµå
+	public int insert(Reply bean) { //sqlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï´ï¿½ insert ï¿½Þ¼Òµï¿½
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "insert into reply values (?,?,?,?,?)";
+			String sql = "insert into reply values (?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bean.getHospital_code());
-			pstmt.setInt(2, bean.getSetBoard_no());
-			pstmt.setString(3, bean.getId());
-			pstmt.setString(4, bean.getReply_content());
-			pstmt.setInt(5, bean.getGrade());			
+			pstmt.setString(2, bean.getId());
+			pstmt.setString(3, bean.getReply_content());
+			pstmt.setInt(4, bean.getGrade());			
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -40,46 +39,16 @@ public class ReplyDAOImpl {
 		return 0;
 	}
 	
-	public int delete(int setBoard_no) { //id¸¦ ÀÔ·Â¹Þ¾Æ¼­ ±× id¸¦ °¡Áø Ç×¸ñÀ» Á¦°ÅÇÏ´Â delete ¸Þ¼Òµå
+	public int delete(String reply_content) { //idï¿½ï¿½ ï¿½Ô·Â¹Þ¾Æ¼ï¿½ ï¿½ï¿½ idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ delete ï¿½Þ¼Òµï¿½
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "delete from reply where setBoard_no=?";
+			String sql = "delete from reply where reply_content=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, setBoard_no);
+			pstmt.setString(1, reply_content);
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return 0;
-	}
-
-	public int edit(Reply bean) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			String sql = "update members set reply_content=? where setBoard_no=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, bean.getReply_content());
-			pstmt.setInt(2, bean.getSetBoard_no());
-			return pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -91,14 +60,13 @@ public class ReplyDAOImpl {
 		return 0;
 	}
 	
-	public Reply createFromResultSet(ResultSet rs) { //resultSetÀ» ¹Þ¾Æ¼­ FoodBeanÀ» ¸®ÅÏÇÏ´Â createFromResultSet ¸Þ¼Òµå
+	public Reply createFromResultSet(ResultSet rs) { //resultSetï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ FoodBeanï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ createFromResultSet ï¿½Þ¼Òµï¿½
 		try {
 			String code = rs.getString("hospital_code");
-			int setBoard_no = rs.getInt("setBoard_no");
 			String id = rs.getString("id");
 			String content = rs.getString("reply_content");
 			int grade = rs.getInt("grade");
-			Reply replys = new Reply(code,setBoard_no,id,content,grade);
+			Reply replys = new Reply(code,id,content,grade);
 			return replys;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -106,7 +74,7 @@ public class ReplyDAOImpl {
 		return null;
 	}
 
-	public List<Reply> selectlist(String hosptial_code) { //FoodBean Å¸ÀÔÀÇ List¸¦ ¸®ÅÏ¹Þ´Â selectList ¸Þ¼Òµå
+	public List<Reply> selectlist(String hosptial_code) { //FoodBean Å¸ï¿½ï¿½ï¿½ï¿½ Listï¿½ï¿½ ï¿½ï¿½ï¿½Ï¹Þ´ï¿½ selectList ï¿½Þ¼Òµï¿½
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -137,7 +105,5 @@ public class ReplyDAOImpl {
 			}
 		}
 		return null;
-	}
-	
+	}	
 }
-

@@ -25,6 +25,7 @@ public class MemberController extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
@@ -72,8 +73,6 @@ public class MemberController extends HttpServlet {
 		} else if (command.equals("/AddReplyAction.do")) { // delete
 			action = new AddReplyAction(); // delete person
 			action.execute(request, response);
-			RequestDispatcher rd = request.getRequestDispatcher("searchPage.jsp");
-			rd.forward(request, response);
 		} 
 	}
 

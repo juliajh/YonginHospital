@@ -42,7 +42,7 @@
 	<c:if test="${sessionID != null }">
 		<script>
 			alert("이미 로그인 중입니다.");
-			location.href = "index.jsp";
+			location.href = "mainBody.jsp";
 		</script>
 	</c:if>
 <div class="login-form">

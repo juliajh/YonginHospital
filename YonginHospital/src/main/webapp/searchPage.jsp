@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="dto.*"%>
 <%@ page import="dao.*"%>
+<%@ page import="jdbc.*"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.*"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +16,8 @@
 <link href="css/searchPage.css" rel="stylesheet" type="text/css">
 </head>
 <body>	
-<% String keyword = request.getParameter("hospital_name");
+<%
+String keyword = request.getParameter("hospital_name");
 %>
 <jsp:include page="header.jsp"/>
 <div class="container">
@@ -115,9 +121,91 @@ function placesSearchCB (data, status, pagination) {
 }
 </script>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2302400bab2456e5c3a2d414983aa9fc"></script>
+<script>
+
+var ps = new kakao.maps.services.Places(); 
+console.log(keyword);
+//키워드로 장소를 검색합니다
+ps.keywordSearch(keyword, placesSearchCB); 
+
+function placesSearchCB (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+    	var str = document.getElementById("phone");
+		str.innerHTML = data[0].phone;
+    	});
+    } 
+}
+</script>
+
+
+<div id = "hospital_information">
+	<form action="AddReplyAction.do" method="post" name = "replyForm">
+		<input type = "text" name = "reply_content" style="width:800px;height:200px;font-size:30px;">
+		<input type = "hidden" name = "hospital_name" value = "<%=keyword%>">
+		<input type = "hidden" name = "id" value = "<%=(String)session.getAttribute("sessionID")%>">
+		<input type = "number" name = "grade">
+		<input type = button onclick = "login()" value="제출" style="width:100px;height:200px;font-size:30px;">
+	</form>
+	<%=(String)session.getAttribute("sessionID")%>
+	<%=keyword%>
+	
+</div>
+
+<%=(String)session.getAttribute("sessionID")%>
+<%=keyword%>
 
 
 
+<script>
+   
 
+ function login(){
+            var replyForm = document.replyForm;
+            var uid = '<%=(String)session.getAttribute("sessionID")%>';
+            if(uid=="null"){ 
+   				alert("로그인 필요");}
+   			else{
+				if(confirm("작성하시겠습니까?")){
+					replyForm.submit();
+					return;
+				} else{
+					replyForm.reset();
+					return false;					
+				}
+            }
+        }
+</script>
+<%!
+	// JDBC driver name and database URL
+	private static final String DB_PROPERTIES = "?serverTimezone=UTC&useSSL=false"; // MySQL Connector J 8.0
+	private static final String DB_SCHEMAS = "sampledb";
+	private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver"; // deprecated "com.mysql.jdbc.Driver";  // try "com.mysql.cj.jdbc.Driver"
+	private static final String DB_URL = "jdbc:mysql://localhost/" + DB_SCHEMAS + DB_PROPERTIES; 
+	private static final String USER = "root";
+	private static final String PASS = "rlarjsdn99";
+%>
+<%
+
+	Connection conn = null;
+		try {
+	Class.forName(JDBC_DRIVER); //STEP 2: Register JDBC driver
+	conn = DriverManager.getConnection(DB_URL, USER, PASS); //STEP 3: Open a connection
+		} catch (SQLException ex) {
+		out.println("Fail to connection.<br>");
+		out.println("SQLException: " + ex.getMessage());
+	}
+
+	ReplyDAOImpl dao = new ReplyDAOImpl(conn);
+	List<Reply> list = dao.selectlist(keyword);
+	if(list != null){
+		for (Reply p: list){
+%>
+	<h1><%= p.getGrade()%></h1>
+	<h1><%= p.getId()%></h1>
+	<h1><%= p.getReply_content() %></h1>
+
+<% 		} 
+	}%>
 </body>
 </html>

@@ -2,15 +2,13 @@ package dto;
 
 public class Reply {
 	private String hospital_code;
-	private int setBoard_no;
 	private String id;
 	private String reply_content;
 	private int grade;
 	
-	public Reply(String hospital_code, int setBoard_no, String id, String reply_content, int grade) {
+	public Reply(String hospital_code, String id, String reply_content, int grade) {
 		super();
 		this.hospital_code = hospital_code;
-		this.setBoard_no = setBoard_no;
 		this.id = id;
 		this.reply_content = reply_content;
 		this.grade = grade;
@@ -22,14 +20,6 @@ public class Reply {
 
 	public void setHospital_code(String hospital_code) {
 		this.hospital_code = hospital_code;
-	}
-
-	public int getSetBoard_no() {
-		return setBoard_no;
-	}
-
-	public void setSetBoard_no(int setBoard_no) {
-		this.setBoard_no = setBoard_no;
 	}
 
 	public String getId() {

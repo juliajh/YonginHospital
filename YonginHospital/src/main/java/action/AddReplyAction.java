@@ -3,8 +3,9 @@ package action;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,15 +15,16 @@ import jdbc.ConnectionProvider;
 
 public class AddReplyAction implements Action {
 	   public void execute(HttpServletRequest request, HttpServletResponse response) {
-		   	String hospital_code = request.getParameter("hospital_code");
-		   	String noStr = request.getParameter("setBoard_no");
+		   	String hospital_name = request.getParameter("hospital_name");
 		   	String id = request.getParameter("id");
 			String reply_content = request.getParameter("reply_content");
 			String gradeStr = request.getParameter("grade");
-			int setBoard_no = Integer.parseInt(noStr);
 			int grade = Integer.parseInt(gradeStr);
-			
-			Reply reply = new Reply(hospital_code,setBoard_no,id,reply_content,grade);
+			System.out.println(hospital_name);
+			System.out.println(id);
+			System.out.println(reply_content);
+			System.out.println(grade);
+			Reply reply = new Reply(hospital_name,id,reply_content,grade);
 			Connection conn = null;
 			try {
 				conn = ConnectionProvider.getConnection();
@@ -30,9 +32,14 @@ public class AddReplyAction implements Action {
 			}
 			ReplyDAOImpl dao = new ReplyDAOImpl(conn);
 			dao.insert(reply);
-	        System.out.println("Sucess Add Member");
-	        try {
-				response.sendRedirect("searchPage.jsp");
+	        System.out.println("Sucess Add reply");
+	        System.out.println(hospital_name);
+	        RequestDispatcher rd = request.getRequestDispatcher("searchPage.jsp?hospital_name="+hospital_name);
+			try {
+				rd.forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
