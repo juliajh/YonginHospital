@@ -27,7 +27,7 @@
 		<h3><a href="main.jsp#main">모두의 병원</a></h3> 
 		<nav>
 			<ul>
-				<li><a href="join.jsp">회원가입</a></li>
+				
 				<li><a href="main.jsp#hospitalSearch">병원검색</a></li>
 				<li><a href="webcrawling.jsp">웹크롤링테스트</a></li>
 				<li><a href="main.jsp#positionSearch">동네병원검색</a></li>
@@ -35,6 +35,7 @@
 					<li><a href="logout.jsp" style="margin-right:40px">로그아웃</a></li>
 				</c:if>
 				<c:if test="${sessionID == null }">
+					<li><a href="join.jsp">회원가입</a></li>
 					<li><a href="login.jsp" style="margin-right:40px">로그인</a></li>
 				</c:if>
 			</ul>
