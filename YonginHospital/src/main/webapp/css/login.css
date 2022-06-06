@@ -13,7 +13,6 @@ body{
 	 justify-content: center;
 	 flex-direction: column;
 	 position: relative;
-	 font-family: 'Roboto', helvetica, arial, sans-serif;
 	 font-size: 1.5em;
 }
 
@@ -182,7 +181,6 @@ input[type="radio"]{
 	border-radius: 5px;
 	border-color: white;
 	text-align:center;
-	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .selectBox:hover {
