@@ -33,13 +33,24 @@
 	overflow: auto;
 	position: absolute;
 	width: 45%;
-	height: 75%;
+	height: 80%;
 	right: 20px;
-	top: 130px;
+	top: 135px;
 	margin: 10px; 
   font-family: 'Noto Sans KR', sans-serif;
   text-align:center;
-  }
+}
+#menu_wrap::-webkit-scrollbar {
+    width: 12px;
+}
+#menu_wrap::-webkit-scrollbar-thumb {
+    background-color: #9fd7b3;
+    border-radius: 10px;
+}
+#menu_wrap::-webkit-scrollbar-track {
+    background-color: #84a98c;
+    border-radius: 10px;
+}
 .bg_white {background:#fff;}
 #menu_wrap .option{text-align: center;}
 #menu_wrap .option p {margin:10px 0;}  
