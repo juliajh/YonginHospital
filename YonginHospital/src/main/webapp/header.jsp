@@ -21,6 +21,10 @@
 <script type="text/javascript" src="js/cart.js"></script>
 <script type="text/javascript" src="js/member.js"></script>
 <link href="css/header.css" rel="stylesheet" type="text/css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 	<header>
@@ -29,7 +33,6 @@
 			<ul>
 				
 				<li><a href="main.jsp#hospitalSearch">병원검색</a></li>
-				<li><a href="webcrawling.jsp">웹크롤링테스트</a></li>
 				<li><a href="main.jsp#positionSearch">동네병원검색</a></li>
 				<c:if test="${sessionID != null }">
 					<li><a href="logout.jsp" style="margin-right:40px">로그아웃</a></li>
