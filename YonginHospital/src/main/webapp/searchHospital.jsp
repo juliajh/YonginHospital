@@ -6,7 +6,7 @@
 <meta charset="EUC-KR">
 <title>searchHospital</title>
 </head>
-<body>
+<body style="background: #dff0e4;">
 
 <jsp:include page="header.jsp"/>
 <jsp:include page="hashtag.jsp"/>

@@ -23,10 +23,9 @@
 <c:set var="hospital" value="<%=hospital%>"/> 
 
 <div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <div id="map" style="border-radius: 20px;width:100%;height:100%;position:relative;overflow:hidden;"></div>
 </div>
 <div id="menu_wrap">
-	<hr>
 	<ul id="placesList"></ul>
 </div>
 <div id="pagination" style="width: 100%; text-align:center;"></div>
