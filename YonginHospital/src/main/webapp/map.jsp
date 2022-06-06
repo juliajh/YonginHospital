@@ -148,7 +148,7 @@ function getListItem(index, places) {
 
     var el = document.createElement('li');
     
-    itemStr = ' <div class="card-body"><a href="searchPage.jsp?hospital_name='+places.place_name+'"><h5 class="card-title">'+places.place_name+'</h5></a>';
+    itemStr = ' <a href="searchPage.jsp?hospital_name='+places.place_name+'"> <div class="card-body"> <h5 class="card-title">'+places.place_name+'</h5>';
 
     if (places.road_address_name) {
         itemStr += '    <p class="card-text"> 档肺疙林家: ' + places.road_address_name + '<br> 林家: '
@@ -158,7 +158,7 @@ function getListItem(index, places) {
     }
                  
       itemStr += '  phone: ' + places.phone  + '<br>' +
-                '</p>'
+                '</p></div></a>'
 
 
     el.innerHTML = itemStr;

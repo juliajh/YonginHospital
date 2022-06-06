@@ -47,7 +47,7 @@
   transition: transform 0.45s ease, background 0.45s ease;}
 #placesList .item span {display: block;margin-top:4px;}
 #placeList .item p{opacity: 0;
-  color: #FFFFFF;
+  color: #2E3C40;
   font-weight: 600;
   line-height: 1.8;
   margin: 0 0 1.25em;
@@ -63,7 +63,7 @@
   transition: color 0.45s ease, border 0.45s ease;}
 #placesList .item:hover{background: #10AD6B;
   transform: scale(1.02);}
-#placesList .item:hover h3{color: #D8FEEE;
+#placesList .item:hover h5{color: #D8FEEE;
   border-bottom-color: #D8FEEE;} 
 #placesList .item:hover p{color: #D8FEEE; opacity: 1;
   transform: none;}
@@ -87,9 +87,7 @@
 #placesList .item .marker_13 {background-position: 0 -562px;}
 #placesList .item .marker_14 {background-position: 0 -608px;}
 #placesList .item .marker_15 {background-position: 0 -654px;}
-#placesList .item a{
-	color: #FFFFFF;
-}
+
 
 
 @keyframes point {
