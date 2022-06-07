@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import = "java.util.*" %>
 
 <!DOCTYPE html>
@@ -42,7 +43,6 @@
 <script>
 
 // places를 담을 배열입니다
-var placesArr = [];
 var markers=[];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -66,26 +66,27 @@ searchPlaces();
 function searchPlaces() {
     <c:forEach items="${bldgList}" var="bldg" varStatus="status">
     	ps.keywordSearch("${bldg}"+' '+"${hospital}", placesSearchCB);
+    	if(${status.index}==${fn:length(bldgList)}-1){
+    		setTimeout(function() {
+    			var placesList=document.getElementById('placesList');
+    			var eleCount = placesList.childElementCount;
+    			if(eleCount==0){
+    				document.querySelector(".modal").classList.remove("hidden");
+    			}
+    			
+    			const close = () => {
+    				   document.querySelector(".modal").classList.add("hidden");
+    				   location.href='main.jsp#positionSearch';
+    			 }
+    			
+    			 document.querySelector(".closeBtn").addEventListener("click", close);
+    			 document.querySelector(".bg").addEventListener("click", close);
+   			}, 1000);
+    	}
 	</c:forEach>
+	
 }
 
-function check(){
-	var placesList=document.getElementById('placesList');
-	var eleCount = placesList.childElementCount;
-	if(eleCount==0){
-		document.querySelector(".modal").classList.remove("hidden");
-	}
-	
-	const close = () => {
-		   document.querySelector(".modal").classList.add("hidden");
-		   location.href='main.jsp#positionSearch';
-	 }
-	
-	 document.querySelector(".closeBtn").addEventListener("click", close);
-	 document.querySelector(".bg").addEventListener("click", close);
-	
-
-}
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
@@ -96,7 +97,6 @@ function placesSearchCB(data, status, pagination) {
 		}
     	displayPlaces(placesArr);
     }
-    check();    	
 }
 
 // 검색 결과 목록과 마커를 표출하는 함수입니다
@@ -146,7 +146,6 @@ function displayPlaces(places)
     }
     // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
     listEl.appendChild(fragment);
-    check();
     menuEl.scrollTop = 0;
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
     map.setBounds(bounds);
