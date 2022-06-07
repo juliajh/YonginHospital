@@ -4,5 +4,5 @@
 	//인증정보(세션삭제)
 	//리다이렉트
 	session.invalidate();
-	response.sendRedirect("main.jsp");
+	response.sendRedirect("mainBody.jsp");
 %>

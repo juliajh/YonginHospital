@@ -30,7 +30,7 @@
 </div>
 <div id="pagination" style="width: 100%; text-align:center;"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2302400bab2456e5c3a2d414983aa9fc&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3093e75566cb9fc76d03f3f1d882d096&libraries=services"></script>
 <script>
 
 // places를 담을 배열입니다
