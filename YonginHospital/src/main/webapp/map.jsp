@@ -30,7 +30,15 @@
 </div>
 <div id="pagination" style="width: 100%; text-align:center;"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3093e75566cb9fc76d03f3f1d882d096&libraries=services"></script>
+<div class="modal hidden">
+  <div class="bg"></div>
+  <div class="modalBox">
+    <img src="https://img.icons8.com/color/48/undefined/delete-sign--v1.png" class="closeBtn"/>
+    <span>병원 정보가 없습니다.<br/>다시 검색해주세요.</span>
+  </div>
+</div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2302400bab2456e5c3a2d414983aa9fc&libraries=services"></script>
 <script>
 
 // places를 담을 배열입니다
@@ -56,37 +64,39 @@ searchPlaces();
 // 키워드 검색을 요청하는 함수입니다
 
 function searchPlaces() {
-
     <c:forEach items="${bldgList}" var="bldg" varStatus="status">
     	ps.keywordSearch("${bldg}"+' '+"${hospital}", placesSearchCB);
 	</c:forEach>
+}
+
+function check(){
+	var placesList=document.getElementById('placesList');
+	var eleCount = placesList.childElementCount;
+	if(eleCount==0){
+		document.querySelector(".modal").classList.remove("hidden");
+	}
+	
+	const close = () => {
+		   document.querySelector(".modal").classList.add("hidden");
+		   location.href='main.jsp#positionSearch';
+	 }
+	
+	 document.querySelector(".closeBtn").addEventListener("click", close);
+	 document.querySelector(".bg").addEventListener("click", close);
+	
 
 }
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
+    	placesArr=[]
     	for ( var i=0; i<data.length; i++ ) {
-        	var mybool=false;
-	   		if(placesArr.length>=1){
-		   		for(var j=0;j<placesArr.length;j++){
-		   			if(data[i].id==placesArr[j].id){
-		   				mybool=true;
-		   				break;
-		   			}
-		   		}
-		   		if (!mybool){
-		   			placesArr.push(data[i]);
-		   		}
-	   		}
-	   		else{
-	   			placesArr.push(data[i]);
-	   		}
-	   		
+    		placesArr.push(data[i]);
 		}
-		
-	   	displayPlaces(placesArr);
+    	displayPlaces(placesArr);
     }
+    check();    	
 }
 
 // 검색 결과 목록과 마커를 표출하는 함수입니다
@@ -102,7 +112,7 @@ function displayPlaces(places)
     removeAllChildNods(listEl);
     // 지도에 표시되고 있는 마커를 제거합니다
     removeMarker();
-		
+
     for ( var i=0; i<places.length; i++ ) {
     	
     	//placesArr에 places 담기 
@@ -131,20 +141,22 @@ function displayPlaces(places)
             };
         })(marker, places[i].place_name);
         fragment.appendChild(itemEl);
+
+        
     }
     // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
     listEl.appendChild(fragment);
+    check();
     menuEl.scrollTop = 0;
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
     map.setBounds(bounds);
     
-    console.log(places);
+
 }
 
 
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
-
     var el = document.createElement('li');
     
     itemStr = ' <a href="searchPage.jsp?hospital_name='+places.place_name+'"> <div class="card-body"> <h5 class="card-title">'+places.place_name+'</h5>';
@@ -164,11 +176,11 @@ function getListItem(index, places) {
     }
     itemStr += '</p></div></a>'
 
-
     el.innerHTML = itemStr;
     el.className = 'item';
 
     return el;
+    
 }
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
@@ -216,5 +228,7 @@ function removeMarker() {
 }
 
 </script>
+
+
 </body>
 </html>
