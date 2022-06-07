@@ -167,9 +167,14 @@ function getListItem(index, places) {
     } else {
         itemStr += '    <p class="card-text">' +  places.address_name  + '<br>'; 
     }
-                 
-      itemStr += '  phone: ' + places.phone  + '<br>' +
-                '</p></div></a>'
+    
+    if(places.phone){
+    	itemStr += '  phone: ' + places.phone  + '<br>';
+    }
+    else{
+    	itemStr += '  phone: X <br>';
+    }
+    itemStr += '</p></div></a>'
 
     el.innerHTML = itemStr;
     el.className = 'item';
