@@ -14,8 +14,10 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <link href="css/searchPage.css" rel="stylesheet" type="text/css">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+  />
 </head>
 <body>	
 <%
@@ -173,77 +175,48 @@ function placesSearchCB (data, status, pagination) {
    			}
  	}
 </script>
-                        
-
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 	<form action="AddReplyAction.do" method="post" name = "replyForm" style="margin-top:50px;">
-	<div class="form-group" id="rating-ability-wrapper" style="text-align:center;">
-	    <label class="control-label" for="rating">
-	    <span class="field-label-header">병원 만족도에 대한 평점을 매겨주세요.</span><br>
-	    <span class="field-label-info"></span>
-	    <input type="hidden" id="selected_rating" name="grade" value="" required="required">
-	    </label>
-	    <h2 class="bold rating-header" style="">
-	    <span class="selected-rating">0</span><small> / 5</small>
-	    </h2>
-	    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1">
-	        <i class="fa fa-star" aria-hidden="true"></i>
-	    </button>
-	    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="2" id="rating-star-2">
-	        <i class="fa fa-star" aria-hidden="true"></i>
-	    </button>
-	    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="3" id="rating-star-3">
-	        <i class="fa fa-star" aria-hidden="true"></i>
-	    </button>
-	    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="4" id="rating-star-4">
-	        <i class="fa fa-star" aria-hidden="true"></i>
-	    </button>
-	    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="5" id="rating-star-5">
-	        <i class="fa fa-star" aria-hidden="true"></i>
-	    </button>
-	    <div class="reply_form" style="margin-top:50px;">
-	    <input type = "text" name = "reply_content" style="width:900px;height:200px; margin-right:40px;border-radius: 10px;">
-		<input type = "hidden" name = "hospital_name" value = "<%=keyword%>">
-		<input type = "hidden" name = "id" value = "<%=(String)session.getAttribute("sessionID")%>">
-		<input type = button onclick = "login()" value="제출" style="width:250px;height:200px;border-radius: 10px; font-size=30px;" >
+		<div class = "starrating">
+		<h1>평점을 입력하여 리뷰를 작성하세요.</h1>
+		<div class="star-rating space-x-4 mx-auto;" id = "star">
+				<input type="radio" id="5-stars" name="grade" value="5"/>
+				<label for="5-stars" class="star pr-4">★</label>
+				<input type="radio" id="4-stars" name="grade" value="4"/>
+				<label for="4-stars" class="star">★</label>
+				<input type="radio" id="3-stars" name="grade" value="3"/>
+				<label for="3-stars" class="star">★</label>
+				<input type="radio" id="2-stars" name="grade" value="2"/>
+				<label for="2-stars" class="star">★</label>
+				<input type="radio" id="1-star" name="grade" value="1"/>
+				<label for="1-star" class="star">★</label>
 		</div>
-	</div>
+		</div>
+	    <div class="reply_form" style="margin-top:50px; text-align:center;">
+	    	<input type = "text" name = "reply_content" placeholder="리뷰를 남겨주세요."style="width:900px;height:195px; margin-right:40px;border-radius: 10px;font-size:30px;">
+			<input type = "hidden" name = "hospital_name" value = "<%=keyword%>">
+			<input type = "hidden" name = "id" value = "<%=(String)session.getAttribute("sessionID")%>">
+			<input type = button onclick = "login()" value="제출" style="width:246px;height:200px;border-radius: 10px; font-size:30px;" >
+		</div>
 	</form>
 	
-	<script>
-	jQuery(document).ready(function($){	
-	    
-		$(".btnrating").on('click',(function(e) {
-		
-		var previous_value = $("#selected_rating").val();
-		
-		var selected_value = $(this).attr("data-attr");
-		$("#selected_rating").val(selected_value);
-		
-		$(".selected-rating").empty();
-		$(".selected-rating").html(selected_value);
-		
-		for (i = 1; i <= selected_value; ++i) {
-		$("#rating-star-"+i).toggleClass('btn-warning');
-		$("#rating-star-"+i).toggleClass('btn-default');
-		}
-		
-		for (ix = 1; ix <= previous_value; ++ix) {
-		$("#rating-star-"+ix).toggleClass('btn-warning');
-		$("#rating-star-"+ix).toggleClass('btn-default');
-		}
-		
-		}));
-	});
-	</script>
+	
 
 <c:forEach var="reply" items="${replyList}" >
 	<div class="reply_content">
   		<div class="reply_content1"><c:out value="${reply.reply_content}" /></div>
   		<div class="reply_content2"><c:out value="ID :${reply.id}" /></div>
-  		<div class="reply_content3"><c:out value="평점 :${reply.grade}" /></div>
+		<div class="reply_content3">
+		<c:forEach begin="0" end="4" var="i">
+                        <c:choose>
+                               <c:when test="${reply.grade > i }">
+                                   <i class="far fas fa-star" ></i>
+                               </c:when>
+                               <c:otherwise>
+                                   <i class="far fa-star"></i>
+                               </c:otherwise>
+                         </c:choose>
+                    </c:forEach>
+		</div>
 	</div>
 </c:forEach>
 </body>

@@ -28,7 +28,9 @@ public class LoginMemberAction implements Action {
 			int loginResult = dao.login(id, pw);
 			if(loginResult==1) {
 				request.setAttribute("loginResult", loginResult);
+				System.out.println("loginSuccess");
 				session = request.getSession();
+				System.out.println(session);
 				session.setAttribute("sessionID", id);
 				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 				rd.forward(request, response);
