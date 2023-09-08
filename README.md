@@ -21,3 +21,6 @@
 3) 카카오 지도 API 활용: 카카오 지도 API를 활용하여 시각적인 지도 정보를 제공 
 
 4) 회원제를 통한 신뢰성 있는 서비스: 회원가입을 한 회원들만 리뷰에 참가할 수 있도록 보다 신뢰성 있는 서비스를 제공
+
+
+![architecture](https://github.com/juliajh/YonginHospital/assets/86089810/6510a2ec-f92a-4264-ad31-966845ee2101)
